@@ -1,0 +1,1473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Why Stuff Matters</title>
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --surface: #121722;
+      --surface2: #171d2a;
+      --surface3: #1d2433;
+      --accent: #7c6af7;
+      --accent2: #5ad1ff;
+      --accent3: #a78bfa;
+      --text: #edf2ff;
+      --muted: #95a0b8;
+      --border: #273043;
+      --success: #7ee2b8;
+      --max: 1180px;
+      --shadow: 0 18px 60px rgba(0, 0, 0, 0.35);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background:
+        radial-gradient(circle at top, rgba(124,106,247,0.12), transparent 30%),
+        radial-gradient(circle at 85% 10%, rgba(90,209,255,0.08), transparent 25%),
+        var(--bg);
+      color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11, 13, 18, 0.76);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 2rem;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .logo {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .logo span { color: var(--accent); }
+
+    .nav-links {
+      list-style: none;
+      display: flex;
+      gap: 1.4rem;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-cta,
+    .btn-primary,
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 12px;
+      transition: transform 0.16s ease, opacity 0.16s ease, border-color 0.16s ease, background 0.16s ease;
+      cursor: pointer;
+    }
+
+    .nav-cta,
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      border: none;
+      font-weight: 700;
+      box-shadow: 0 10px 30px rgba(124,106,247,0.25);
+    }
+
+    .nav-cta { padding: 0.7rem 1rem; font-size: 0.88rem; }
+    .btn-primary { padding: 0.85rem 1.35rem; font-size: 0.96rem; }
+
+    .btn-secondary {
+      padding: 0.85rem 1.35rem;
+      background: rgba(255,255,255,0.02);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-size: 0.96rem;
+      font-weight: 600;
+    }
+
+    .nav-cta:hover,
+    .btn-primary:hover,
+    .btn-secondary:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(124,106,247,0.45);
+      background: rgba(124,106,247,0.06);
+    }
+
+    .hero {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5.5rem 2rem 3rem;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2rem;
+      align-items: center;
+    }
+
+    .hero-tag,
+    .section-label,
+    .featured-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--accent3);
+      border: 1px solid rgba(167,139,250,0.28);
+      background: rgba(124,106,247,0.1);
+      padding: 0.42rem 0.8rem;
+      border-radius: 999px;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-copy h1 {
+      font-size: clamp(2.7rem, 6vw, 4.7rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+      max-width: 11ch;
+      margin-bottom: 1rem;
+      font-weight: 900;
+    }
+
+    .hero-copy .highlight {
+      background: linear-gradient(135deg, #ffffff 10%, var(--accent3) 35%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-copy p {
+      color: var(--muted);
+      font-size: 1.08rem;
+      max-width: 58ch;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(120px, 1fr));
+      gap: 0.9rem;
+      max-width: 660px;
+    }
+
+    .hero-meta-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .hero-meta-card strong {
+      display: block;
+      font-size: 1.25rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-meta-card span {
+      color: var(--muted);
+      font-size: 0.84rem;
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 520px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+      align-content: center;
+    }
+
+    .visual-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 22px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .visual-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      min-height: 180px;
+      filter: saturate(0.95) contrast(1.03);
+    }
+
+    .visual-card.tall { transform: translateY(2rem); }
+    .visual-card.short { transform: translateY(-1rem); }
+
+    .stats {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 1rem 2rem 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1rem;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 1.25rem;
+    }
+
+    .stat-num {
+      font-size: 1.8rem;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.25rem;
+    }
+
+    .stat-label {
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    section {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 5rem 2rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 0.7rem;
+      font-weight: 900;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      max-width: 62ch;
+      margin-bottom: 2rem;
+    }
+
+    .featured-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 1.25rem;
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 1.2rem;
+      align-items: stretch;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .featured-copy {
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .featured-copy h2 {
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.06;
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin-bottom: 0.8rem;
+    }
+
+    .featured-copy p {
+      color: var(--muted);
+      margin-bottom: 1.25rem;
+    }
+
+    .featured-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .featured-chip {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      border-radius: 999px;
+      padding: 0.45rem 0.8rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .featured-visual {
+      min-height: 360px;
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .featured-visual img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .prd-grid,
+    .steps,
+    .sources-grid,
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1rem;
+    }
+
+    .prd-block,
+    .step,
+    .source-card,
+    .roadmap-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 18px;
+      padding: 1.35rem;
+    }
+
+    .prd-block h3,
+    .step h3,
+    .source-card h3,
+    .roadmap-item h3 {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 0.55rem;
+      letter-spacing: -0.02em;
+    }
+
+    .prd-block p,
+    .prd-block li,
+    .step p,
+    .source-card p,
+    .roadmap-item p {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .prd-block ul { padding-left: 1rem; }
+
+    .search-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 0.9rem 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .search-bar svg { flex-shrink: 0; color: var(--muted); }
+
+    .search-bar input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      outline: none;
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    .search-bar input::placeholder { color: var(--muted); }
+
+    .categories {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+      margin-bottom: 1.6rem;
+    }
+
+    .cat-pill {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: var(--muted);
+      padding: 0.55rem 0.9rem;
+      border-radius: 999px;
+      cursor: pointer;
+      font-size: 0.88rem;
+      font-weight: 700;
+      transition: all 0.18s ease;
+    }
+
+    .cat-pill:hover,
+    .cat-pill.active {
+      color: var(--text);
+      border-color: rgba(124,106,247,0.4);
+      background: rgba(124,106,247,0.12);
+    }
+
+    .explore-header {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .results-count {
+      color: var(--muted);
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
+      gap: 1rem;
+    }
+
+    .card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.2);
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(124,106,247,0.36);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.28);
+    }
+
+    .card-image {
+      height: 180px;
+      overflow: hidden;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      background: var(--surface2);
+    }
+
+    .card-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.35s ease;
+    }
+
+    .card:hover .card-image img { transform: scale(1.03); }
+
+    .card-content { padding: 1.2rem; }
+
+    .card-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.73rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.35rem 0.65rem;
+      border-radius: 999px;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-purple { background: rgba(124,106,247,0.14); color: #b5a7ff; }
+    .tag-pink { background: rgba(255,122,162,0.12); color: #ff9ab9; }
+    .tag-teal { background: rgba(90,209,255,0.12); color: #8ee3ff; }
+
+    .card h3 {
+      font-size: 1.08rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.45rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-footer {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 0.95rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+    }
+
+    .card-arrow {
+      width: 32px;
+      height: 32px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.06);
+      transition: background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .card:hover .card-arrow {
+      background: rgba(124,106,247,0.18);
+      border-color: rgba(124,106,247,0.34);
+    }
+
+    .step-num {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: #fff;
+      font-weight: 900;
+      margin-bottom: 0.8rem;
+      box-shadow: 0 10px 24px rgba(124,106,247,0.18);
+    }
+
+    .newsletter {
+      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.02));
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 24px;
+      padding: 2.4rem;
+      text-align: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .newsletter::before {
+      content: "";
+      position: absolute;
+      inset: auto auto -120px 50%;
+      width: 320px;
+      height: 320px;
+      transform: translateX(-50%);
+      background: radial-gradient(circle, rgba(124,106,247,0.14), transparent 68%);
+      pointer-events: none;
+    }
+
+    .newsletter h2 {
+      font-size: clamp(1.7rem, 3vw, 2.2rem);
+      letter-spacing: -0.03em;
+      margin-bottom: 0.4rem;
+      font-weight: 900;
+    }
+
+    .newsletter p { color: var(--muted); margin-bottom: 1.2rem; }
+
+    .newsletter-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+
+    .newsletter-form input {
+      flex: 1;
+      min-width: 240px;
+      padding: 0.9rem 1rem;
+      background: rgba(255,255,255,0.04);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      outline: none;
+      font-size: 0.95rem;
+    }
+
+    .newsletter-form input:focus { border-color: rgba(124,106,247,0.4); }
+    .newsletter-form input::placeholder { color: var(--muted); }
+
+    footer {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 2.4rem 2rem 4rem;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,0.06);
+      text-align: center;
+      font-size: 0.9rem;
+    }
+
+    footer strong { color: var(--text); }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(5, 8, 14, 0.76);
+      backdrop-filter: blur(12px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1rem;
+      z-index: 200;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease;
+    }
+
+    .modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal {
+      width: min(920px, 100%);
+      background: linear-gradient(180deg, #101520, #0d121b);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 28px 80px rgba(0,0,0,0.48);
+      transform: translateY(16px);
+      transition: transform 0.22s ease;
+    }
+
+    .modal-overlay.open .modal { transform: translateY(0); }
+
+    .modal-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .modal-image {
+      min-height: 420px;
+      background: var(--surface2);
+    }
+
+    .modal-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .modal-panel {
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .modal-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+
+    .modal-top h2 {
+      font-size: 1.55rem;
+      line-height: 1.1;
+      letter-spacing: -0.04em;
+      font-weight: 900;
+      margin-top: 0.35rem;
+    }
+
+    .modal-close {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.04);
+      color: var(--muted);
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .modal-close:hover { color: var(--text); }
+
+    .modal-body {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .modal-block {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.06);
+      border-radius: 16px;
+      padding: 1rem;
+    }
+
+    .modal-block h4 {
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      margin-bottom: 0.7rem;
+    }
+
+    .modal-block ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .modal-block li {
+      color: var(--muted);
+      font-size: 0.9rem;
+      display: flex;
+      gap: 0.6rem;
+      align-items: start;
+    }
+
+    .modal-block li::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      margin-top: 0.45rem;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      flex-shrink: 0;
+    }
+
+    .related-topics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.55rem;
+    }
+
+    .related-pill {
+      border: 1px solid rgba(255,255,255,0.08);
+      background: rgba(255,255,255,0.03);
+      color: var(--muted);
+      padding: 0.45rem 0.75rem;
+      border-radius: 999px;
+      font-size: 0.84rem;
+      cursor: pointer;
+    }
+
+    .related-pill:hover {
+      color: var(--text);
+      border-color: rgba(124,106,247,0.34);
+    }
+
+    .empty-state {
+      grid-column: 1 / -1;
+      padding: 2.4rem;
+      text-align: center;
+      color: var(--muted);
+      border: 1px dashed rgba(255,255,255,0.08);
+      border-radius: 18px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    @media (max-width: 1080px) {
+      .hero,
+      .featured-card,
+      .modal-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual { min-height: auto; }
+      .visual-card.tall,
+      .visual-card.short { transform: none; }
+      .modal-image { min-height: 260px; }
+    }
+
+    @media (max-width: 760px) {
+      .nav-links { display: none; }
+      .nav-inner,
+      .hero,
+      section,
+      footer,
+      .stats { padding-left: 1rem; padding-right: 1rem; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .hero-meta { grid-template-columns: 1fr; }
+      .cards-grid { grid-template-columns: 1fr; }
+      .newsletter { padding: 1.5rem; }
+    }
+
+    @media (max-width: 520px) {
+      .stats { grid-template-columns: 1fr; }
+      .hero-copy h1 { max-width: none; }
+      .modal-panel { padding: 1rem; }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="nav-inner">
+      <a href="#" class="logo">why<span>.</span>stuff<span>.</span>matters</a>
+      <ul class="nav-links">
+        <li><a href="#featured">Featured</a></li>
+        <li><a href="#product">PRD</a></li>
+        <li><a href="#explore">Explore</a></li>
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#sources">Sources</a></li>
+      </ul>
+      <a href="#explore" class="nav-cta">Explore topics</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-copy">
+      <div class="hero-tag">Productized knowledge discovery</div>
+      <h1>Discover <span class="highlight">why the things you study matter</span></h1>
+      <p>
+        A curated library of academic fields, obscure disciplines, and overlooked ideas — translated into real-world systems,
+        careers, technologies, and decisions. Search by field, browse by category, and follow the threads across domains.
+      </p>
+      <div class="hero-buttons">
+        <a href="#explore" class="btn-primary">Browse the library</a>
+        <a href="#product" class="btn-secondary">Read the PRD</a>
+      </div>
+      <div class="hero-meta">
+        <div class="hero-meta-card">
+          <strong id="heroTopicCount">0+</strong>
+          <span>Topics mapped to real-world use cases</span>
+        </div>
+        <div class="hero-meta-card">
+          <strong>7</strong>
+          <span>Searchable categories across disciplines</span>
+        </div>
+        <div class="hero-meta-card">
+          <strong>Curated</strong>
+          <span>Every topic includes applications and related fields</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="visual-card tall">
+        <img src="https://images.unsplash.com/photo-1507413245164-6160d8298b31?auto=format&fit=crop&w=1000&q=80" alt="Abstract mathematical and scientific visualization">
+      </div>
+      <div class="visual-card short">
+        <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1000&q=80" alt="Technology laboratory visual">
+      </div>
+      <div class="visual-card short">
+        <img src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=1000&q=80" alt="Astronomical imagery">
+      </div>
+      <div class="visual-card tall">
+        <img src="https://images.unsplash.com/photo-1518152006812-edab29b069ac?auto=format&fit=crop&w=1000&q=80" alt="Archive and historical research image">
+      </div>
+    </div>
+  </header>
+
+  <div class="stats">
+    <div class="stat"><div class="stat-num" id="statsTopicCount">0+</div><div class="stat-label">Topics covered</div></div>
+    <div class="stat"><div class="stat-num">50+</div><div class="stat-label">New additions in this build</div></div>
+    <div class="stat"><div class="stat-num">1,000+</div><div class="stat-label">Concrete applications surfaced</div></div>
+    <div class="stat"><div class="stat-num">Dark</div><div class="stat-label">Editorial, product-grade interface</div></div>
+  </div>
+
+  <section id="featured">
+    <div class="section-label">Featured</div>
+    <div class="featured-card">
+      <div class="featured-copy">
+        <div class="featured-label">This week's pick</div>
+        <h2>Why topology matters far beyond pure mathematics</h2>
+        <p>
+          Topology is often introduced as an abstract study of shape and continuity. In practice, it now helps researchers detect structure in high-dimensional data,
+          model neural connectivity, understand condensed matter systems, and extract signal from noisy measurements.
+        </p>
+        <div class="featured-meta">
+          <div class="featured-chip">Applied math</div>
+          <div class="featured-chip">Machine learning</div>
+          <div class="featured-chip">Neuroscience</div>
+          <div class="featured-chip">Materials science</div>
+        </div>
+        <div>
+          <a href="#" class="btn-primary" onclick="openModal('topology'); return false;">Open topic</a>
+        </div>
+      </div>
+      <div class="featured-visual">
+        <img src="https://images.unsplash.com/photo-1526378800651-c32d170fe6f8?auto=format&fit=crop&w=1200&q=80" alt="Abstract geometric pattern representing topology">
+      </div>
+    </div>
+  </section>
+
+  <section id="product">
+    <div class="section-label">Product</div>
+    <h2 class="section-title">Product Requirements Document</h2>
+    <p class="section-sub">
+      This platform is designed as a real product, not a one-off landing page. The goal is to make academic knowledge legible, searchable,
+      and practically relevant for people making decisions about study, work, and interdisciplinary exploration.
+    </p>
+
+    <div class="prd-grid">
+      <div class="prd-block">
+        <h3>Mission</h3>
+        <p>
+          Help learners understand how obscure, theoretical, or underestimated fields connect to systems in technology, policy, science, industry, and culture.
+        </p>
+      </div>
+      <div class="prd-block">
+        <h3>Problem</h3>
+        <p>
+          Many disciplines are taught in isolation. Students and curious professionals often see the content but not the consequences, applications, or adjacent pathways.
+        </p>
+      </div>
+      <div class="prd-block">
+        <h3>Target users</h3>
+        <ul>
+          <li>Students choosing courses, majors, or research directions</li>
+          <li>Professionals exploring adjacent fields</li>
+          <li>Educators explaining relevance</li>
+          <li>General audiences following curiosity across domains</li>
+        </ul>
+      </div>
+      <div class="prd-block">
+        <h3>Core value proposition</h3>
+        <ul>
+          <li>Translate abstractions into real use cases</li>
+          <li>Make cross-disciplinary links visible</li>
+          <li>Support discovery through search and filters</li>
+          <li>Package each topic in a readable, reusable format</li>
+        </ul>
+      </div>
+      <div class="prd-block">
+        <h3>MVP features</h3>
+        <ul>
+          <li>Topic library with category filters</li>
+          <li>Topic modal with practical applications</li>
+          <li>Related-topic discovery</li>
+          <li>Featured editorial topic</li>
+          <li>Newsletter capture for recurring engagement</li>
+        </ul>
+      </div>
+      <div class="prd-block">
+        <h3>Success metrics</h3>
+        <ul>
+          <li>Topics viewed per session</li>
+          <li>Search-to-topic click-through rate</li>
+          <li>Newsletter conversion rate</li>
+          <li>Return visits from recurring learners</li>
+        </ul>
+      </div>
+      <div class="prd-block">
+        <h3>Editorial principles</h3>
+        <ul>
+          <li>Concrete before abstract</li>
+          <li>Specific examples over vague claims</li>
+          <li>Interdisciplinary framing by default</li>
+          <li>Credibility cues without academic clutter</li>
+        </ul>
+      </div>
+      <div class="prd-block">
+        <h3>Future roadmap</h3>
+        <ul>
+          <li>Source-backed citations per topic</li>
+          <li>Topic graphs and concept maps</li>
+          <li>Career pathways by field</li>
+          <li>User submissions and editorial review workflow</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="explore">
+    <div class="section-label">Explore</div>
+    <div class="explore-header">
+      <div>
+        <h2 class="section-title">Find your niche</h2>
+        <p class="section-sub">Search the library by field, category, or application area. Each topic explains what the field studies and where it shows up in the real world.</p>
+      </div>
+      <div class="results-count" id="resultsCount">0 topics visible</div>
+    </div>
+
+    <div class="search-bar">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <circle cx="11" cy="11" r="8"></circle>
+        <path d="m21 21-4.35-4.35"></path>
+      </svg>
+      <input type="text" id="searchInput" placeholder="Search topics, fields, industries, applications" oninput="filterCards()" />
+    </div>
+
+    <div class="categories">
+      <button class="cat-pill active" onclick="filterCategory(this, 'all')">All</button>
+      <button class="cat-pill" onclick="filterCategory(this, 'science')">Science</button>
+      <button class="cat-pill" onclick="filterCategory(this, 'humanities')">Humanities</button>
+      <button class="cat-pill" onclick="filterCategory(this, 'math')">Math</button>
+      <button class="cat-pill" onclick="filterCategory(this, 'arts')">Arts</button>
+      <button class="cat-pill" onclick="filterCategory(this, 'social')">Social sciences</button>
+      <button class="cat-pill" onclick="filterCategory(this, 'tech')">Tech</button>
+    </div>
+
+    <div class="cards-grid" id="cardsGrid"></div>
+  </section>
+
+  <section id="how">
+    <div class="section-label">How it works</div>
+    <h2 class="section-title">A structured path from curiosity to relevance</h2>
+    <p class="section-sub">The interface is designed around a simple loop: discover a field, understand it quickly, then follow the practical threads into adjacent systems.</p>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Pick a field</h3>
+        <p>Browse by discipline or search directly for a topic you have heard about but never fully understood.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Read the field summary</h3>
+        <p>Each entry explains what the discipline studies in straightforward language without stripping away the actual rigor.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>See practical applications</h3>
+        <p>Every topic includes concrete examples tied to research, technology, public systems, markets, or institutions.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3>Follow related topics</h3>
+        <p>Related fields reveal the broader network around a subject, turning isolated knowledge into a map.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="sources">
+    <div class="section-label">Credibility</div>
+    <h2 class="section-title">Editorial source model</h2>
+    <p class="section-sub">This build includes product signals that make the platform feel grounded and maintainable. The current version is static, but the content model is ready for sourced expansion.</p>
+    <div class="sources-grid">
+      <div class="source-card">
+        <h3>Institutional sources</h3>
+        <p>Topics are written in a style that can later incorporate academic references from university departments, major journals, and public research institutions.</p>
+      </div>
+      <div class="source-card">
+        <h3>Applied examples</h3>
+        <p>Each field is framed through concrete domains such as public health, machine learning, energy systems, finance, design, logistics, and policy.</p>
+      </div>
+      <div class="source-card">
+        <h3>Expandable structure</h3>
+        <p>The data model supports future source links, author metadata, citation cards, and editorial timestamps without redesigning the interface.</p>
+      </div>
+      <div class="source-card">
+        <h3>Roadmap readiness</h3>
+        <p>The product is set up for topic submission, moderation, a larger knowledge graph, and richer media like diagrams, institution logos, and reference libraries.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="newsletter">
+      <div class="section-label" style="margin-bottom:0.8rem;">Stay curious</div>
+      <h2>Get the weekly "Why it matters" digest</h2>
+      <p>One field, three concrete applications, and a path into related disciplines.</p>
+      <form class="newsletter-form" onsubmit="handleSubscribe(event)">
+        <input type="email" placeholder="your@email.com" required />
+        <button type="submit" class="btn-primary">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <p style="margin-bottom:0.5rem;"><strong>why stuff matters</strong> — because nothing exists in a vacuum</p>
+    <p>Built as a dark editorial product concept for academic relevance discovery.</p>
+  </footer>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
+    <div class="modal" id="modal">
+      <div class="modal-grid">
+        <div class="modal-image"><img id="modalImage" src="" alt="" /></div>
+        <div class="modal-panel">
+          <div class="modal-top">
+            <div>
+              <span id="modalTag" class="card-tag"></span>
+              <h2 id="modalTitle"></h2>
+            </div>
+            <button class="modal-close" onclick="closeModal()" aria-label="Close modal">✕</button>
+          </div>
+          <div class="modal-body" id="modalBody"></div>
+          <div class="modal-block">
+            <h4>Real-world applications</h4>
+            <ul id="modalExamples"></ul>
+          </div>
+          <div class="modal-block">
+            <h4>Related topics</h4>
+            <div class="related-topics" id="modalRelated"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const baseImage = (query) => `https://source.unsplash.com/featured/900x700/?${encodeURIComponent(query)}`;
+
+    const topics = [
+      {
+        id: 'topology', image: baseImage('abstract geometry topology'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math',
+        title: 'Topology',
+        desc: 'The mathematics of continuity, shape, and structure now used in data science, neuroscience, and materials research.',
+        readTime: '6 min read',
+        body: 'Topology studies properties of space that remain stable under continuous deformation. What starts as pure mathematics becomes useful whenever researchers need to detect shape in noisy, high-dimensional, or incomplete systems. Applied topology now appears in machine learning, medical imaging, neural mapping, and condensed matter physics.',
+        examples: [
+          'Detecting loops and voids in high-dimensional datasets',
+          'Studying protein folding and structural biology',
+          'Modeling neural connectivity patterns in brain research',
+          'Understanding topological phases of matter'
+        ],
+        related: ['graph-theory', 'network-science', 'complex-systems']
+      },
+      {
+        id: 'medieval-history', image: baseImage('medieval manuscript archive history'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities',
+        title: 'Medieval History',
+        desc: 'A field that reveals how institutions, crises, trade systems, and social trust behave under stress over long time horizons.',
+        readTime: '5 min read',
+        body: 'Medieval history is more than castles and kings. It offers a laboratory for understanding state formation, trade networks, religious authority, pandemics, institutional resilience, and collapse. These patterns remain relevant in policy, governance, logistics, and public trust analysis.',
+        examples: [
+          'Comparing state fragility across historical and modern settings',
+          'Studying premodern trade networks to understand supply disruption',
+          'Tracing plague response and social behavior during crisis',
+          'Analyzing institutional continuity through political upheaval'
+        ],
+        related: ['archaeology', 'anthropology', 'archival-science']
+      },
+      {
+        id: 'mycology', image: baseImage('fungi mycology forest laboratory'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science',
+        title: 'Mycology',
+        desc: 'The study of fungi now matters in medicine, ecological repair, sustainable materials, and biomanufacturing.',
+        readTime: '7 min read',
+        body: 'Mycology studies fungi as organisms, chemical producers, decomposers, and network-builders. What once looked like a narrow branch of biology is now central to sustainable materials, ecosystem restoration, drug discovery, and fermentation science.',
+        examples: [
+          'Developing mycelium-based packaging and insulation',
+          'Using fungal enzymes for waste and pollutant breakdown',
+          'Studying medicinal compounds derived from mushrooms',
+          'Understanding forest nutrient exchange and soil health'
+        ],
+        related: ['ecology', 'synthetic-biology', 'materials-science']
+      },
+      {
+        id: 'graph-theory', image: baseImage('network graph lines data'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math',
+        title: 'Graph Theory',
+        desc: 'The mathematics of nodes and edges underpins internet routing, logistics, social networks, and fraud detection.',
+        readTime: '5 min read',
+        body: 'Graph theory models systems as relationships between entities. That framework applies almost everywhere: transport networks, recommendation engines, contact tracing, distributed computing, and financial crime detection all rely on graph structure.',
+        examples: [
+          'Optimizing routes and delivery systems',
+          'Powering search ranking and recommendation systems',
+          'Analyzing epidemic spread through contact networks',
+          'Detecting suspicious behavior in transaction graphs'
+        ],
+        related: ['network-science', 'complex-systems', 'distributed-systems']
+      },
+      {
+        id: 'linguistics', image: baseImage('language text linguistics library'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities',
+        title: 'Linguistics',
+        desc: 'Scientific study of language that shapes AI systems, legal interpretation, public communication, and interface design.',
+        readTime: '6 min read',
+        body: 'Linguistics studies language structure, meaning, use, and variation. Its insights power speech systems, machine translation, language models, forensic analysis, literacy interventions, and better cross-cultural communication.',
+        examples: [
+          'Improving natural language processing systems',
+          'Supporting forensic authorship analysis',
+          'Designing public health communication across audiences',
+          'Documenting endangered languages with digital tools'
+        ],
+        related: ['computational-linguistics', 'semiotics', 'cognitive-science']
+      },
+      {
+        id: 'thermodynamics', image: baseImage('heat energy thermodynamics industrial'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science',
+        title: 'Thermodynamics',
+        desc: 'A foundational science of heat, energy, and efficiency that governs engines, climate systems, and computing infrastructure.',
+        readTime: '6 min read',
+        body: 'Thermodynamics explains how energy moves and transforms through physical systems. It constrains machine efficiency, shapes climate modeling, determines chemical reaction behavior, and matters to everything from refrigeration to data center cooling.',
+        examples: [
+          'Designing more efficient engines and turbines',
+          'Modeling energy transfer in climate systems',
+          'Reducing heat loads in data centers',
+          'Understanding entropy in physical and information systems'
+        ],
+        related: ['materials-science', 'climate-science', 'information-theory']
+      },
+      {
+        id: 'philosophy-of-mind', image: baseImage('consciousness brain philosophy abstract'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities',
+        title: 'Philosophy of Mind',
+        desc: 'Questions about consciousness and perception now matter for AI ethics, neuroscience, and legal responsibility.',
+        readTime: '7 min read',
+        body: 'Philosophy of mind asks what consciousness is, how mental states relate to physical systems, and how perception, identity, and agency work. Those questions now sit near debates about artificial intelligence, neural interfaces, and moral accountability.',
+        examples: [
+          'Informing debates about machine consciousness',
+          'Framing legal questions around agency and responsibility',
+          'Supporting interpretation of neuroscience findings',
+          'Clarifying concepts used in AI safety and ethics'
+        ],
+        related: ['neuroscience', 'cognitive-science', 'human-computer-interaction']
+      },
+      {
+        id: 'music-theory', image: baseImage('music notation sound wave studio'), tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts',
+        title: 'Music Theory',
+        desc: 'Formal structure in music influences audio technology, composition systems, cognition research, and pattern learning.',
+        readTime: '5 min read',
+        body: 'Music theory studies harmony, rhythm, form, and structure. Those ideas travel into audio compression, recommendation systems, generative music tools, therapy, and cognitive science research on temporal perception and pattern recognition.',
+        examples: [
+          'Informing algorithmic composition systems',
+          'Helping structure audio analysis and compression',
+          'Supporting music-based cognitive and therapeutic interventions',
+          'Modeling temporal pattern recognition in the brain'
+        ],
+        related: ['signal-processing', 'cognitive-science', 'industrial-design']
+      },
+      {
+        id: 'behavioral-economics', image: baseImage('decision behavior economics psychology'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social',
+        title: 'Behavioral Economics',
+        desc: 'A field that studies predictable irrationality in human decisions and shapes policy, finance, and product design.',
+        readTime: '5 min read',
+        body: 'Behavioral economics studies how real people depart from idealized rational behavior. That matters whenever organizations design choices, defaults, incentives, forms, markets, or experiences that people interact with under uncertainty.',
+        examples: [
+          'Improving retirement and savings enrollment systems',
+          'Designing better policy nudges and public forms',
+          'Reducing friction in product onboarding',
+          'Understanding investor behavior and market anomalies'
+        ],
+        related: ['decision-theory', 'game-theory', 'human-computer-interaction']
+      },
+      {
+        id: 'geodesy', image: baseImage('earth satellite mapping geodesy'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science',
+        title: 'Geodesy',
+        desc: 'Precision measurement of Earth makes GPS work and helps track earthquakes, groundwater, and sea-level change.',
+        readTime: '4 min read',
+        body: 'Geodesy measures the Earth’s shape, gravitational field, and motion in space. It is a hidden infrastructure field that supports navigation, disaster monitoring, surveying, and environmental measurement at very high precision.',
+        examples: [
+          'Correcting satellite navigation systems',
+          'Monitoring crust movement and seismic strain',
+          'Tracking sea-level rise and polar ice mass change',
+          'Measuring groundwater depletion through gravity changes'
+        ],
+        related: ['cartography', 'remote-sensing', 'oceanography']
+      },
+      {
+        id: 'semiotics', image: baseImage('symbols signage interface semiotics'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities',
+        title: 'Semiotics',
+        desc: 'The study of signs and meaning helps explain branding, interfaces, propaganda, and digital culture.',
+        readTime: '5 min read',
+        body: 'Semiotics studies how signs create meaning through symbols, images, language, and context. It matters in branding, interface systems, online communication, political messaging, and any environment where interpretation drives behavior.',
+        examples: [
+          'Designing icons and visual systems that communicate clearly',
+          'Analyzing narrative framing and propaganda',
+          'Studying cultural meaning shifts in memes and symbols',
+          'Improving brand coherence across channels'
+        ],
+        related: ['linguistics', 'archival-science', 'data-visualization']
+      },
+      {
+        id: 'number-theory', image: baseImage('numbers code cryptography mathematics'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math',
+        title: 'Number Theory',
+        desc: 'Pure mathematics that became core infrastructure for encryption, secure communication, and digital systems.',
+        readTime: '6 min read',
+        body: 'Number theory studies integers, primes, modular arithmetic, and related structures. Once celebrated for being purely theoretical, it now underlies cryptographic systems used in banking, messaging, identity systems, and secure infrastructure.',
+        examples: [
+          'Supporting public-key cryptography',
+          'Enabling digital signatures and identity verification',
+          'Informing random number generation methods',
+          'Powering error-correcting and coding systems'
+        ],
+        related: ['cryptography', 'information-theory', 'quantum-information']
+      },
+
+      { id: 'game-theory', image: baseImage('chess strategy game theory'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Game Theory', desc: 'Strategic decision making used in economics, diplomacy, security, auctions, and AI.', readTime: '5 min read', body: 'Game theory studies how agents make decisions when outcomes depend on one another. It helps model conflict, cooperation, incentives, bargaining, signaling, and competition.', examples: ['Designing auctions and marketplaces', 'Modeling deterrence and negotiation', 'Improving multi-agent AI coordination', 'Analyzing pricing competition'], related: ['behavioral-economics', 'decision-theory', 'cybersecurity'] },
+      { id: 'network-science', image: baseImage('network science connections'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Network Science', desc: 'A cross-disciplinary field for understanding connected systems from social ties to power grids.', readTime: '5 min read', body: 'Network science expands graph thinking into dynamic, real-world systems with hubs, cascades, resilience, and emergent behavior.', examples: ['Modeling infrastructure resilience', 'Studying information diffusion online', 'Mapping disease transmission pathways', 'Understanding financial contagion'], related: ['graph-theory', 'complex-systems', 'epidemiology'] },
+      { id: 'systems-thinking', image: baseImage('systems diagram complexity'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Systems Thinking', desc: 'A way of reasoning about feedback loops, unintended consequences, and interconnected systems.', readTime: '4 min read', body: 'Systems thinking helps people understand how components interact over time through feedback, delays, incentives, and nonlinear effects.', examples: ['Improving organizational decision making', 'Designing better public policy interventions', 'Diagnosing failure in complex operations', 'Modeling long-term ecosystem effects'], related: ['complex-systems', 'control-theory', 'urban-planning'] },
+      { id: 'archaeology', image: baseImage('archaeology excavation artifacts'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Archaeology', desc: 'Material traces of past societies reveal migration, adaptation, technology, and environmental change.', readTime: '5 min read', body: 'Archaeology studies human activity through physical remains. It informs heritage work, climate adaptation studies, trade history, and long-term patterns of settlement and resource use.', examples: ['Reconstructing settlement response to climate stress', 'Tracing long-distance trade systems', 'Preserving cultural heritage sites', 'Studying ancient technologies and materials'], related: ['medieval-history', 'anthropology', 'paleoclimatology'] },
+      { id: 'paleoclimatology', image: baseImage('ice core climate geology'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Paleoclimatology', desc: 'Past climate records help scientists understand long-term environmental change and modern risk.', readTime: '5 min read', body: 'Paleoclimatology reconstructs historical climates using ice cores, sediments, tree rings, and other proxies to understand baseline variability and extreme transitions.', examples: ['Improving long-term climate models', 'Understanding drought cycles and resilience', 'Contextualizing recent warming trends', 'Linking environmental change to societal response'], related: ['climate-science', 'geochemistry', 'oceanography'] },
+      { id: 'biomimicry', image: baseImage('biomimicry nature design'), tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Biomimicry', desc: 'Design inspired by biological systems influences materials, architecture, robotics, and product innovation.', readTime: '4 min read', body: 'Biomimicry studies how natural systems solve structural, energetic, and adaptive problems, then translates those strategies into human design.', examples: ['Designing low-drag surfaces and structures', 'Creating passive cooling in architecture', 'Improving robotics through animal locomotion models', 'Developing adhesives inspired by biological mechanisms'], related: ['materials-science', 'robotics', 'industrial-design'] },
+      { id: 'fluid-dynamics', image: baseImage('fluid dynamics smoke water flow'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Fluid Dynamics', desc: 'The physics of moving liquids and gases matters in aerospace, weather, medicine, and energy.', readTime: '6 min read', body: 'Fluid dynamics studies how liquids and gases move under forces and constraints. It shapes aircraft design, blood flow modeling, weather prediction, and industrial process optimization.', examples: ['Designing aircraft and turbine systems', 'Modeling cardiovascular flow', 'Improving ventilation and smoke control', 'Understanding ocean and atmospheric circulation'], related: ['thermodynamics', 'oceanography', 'transportation-engineering'] },
+      { id: 'urban-planning', image: baseImage('city planning urban night'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Urban Planning', desc: 'A discipline that structures cities through mobility, land use, housing, resilience, and public space.', readTime: '5 min read', body: 'Urban planning coordinates infrastructure, housing, policy, transportation, and environmental constraints across dense human systems.', examples: ['Designing public transit networks', 'Reducing congestion and land-use conflict', 'Planning climate-resilient urban infrastructure', 'Improving walkability and service access'], related: ['cartography', 'transportation-engineering', 'environmental-economics'] },
+      { id: 'cartography', image: baseImage('map cartography satellite terrain'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Cartography', desc: 'Mapmaking shapes navigation, planning, environmental monitoring, and how people understand space.', readTime: '4 min read', body: 'Cartography is the design and science of representing spatial information. It matters because maps do not just display reality—they shape decisions and perception.', examples: ['Designing emergency response maps', 'Communicating spatial risk and infrastructure data', 'Building consumer navigation interfaces', 'Visualizing environmental change across regions'], related: ['geodesy', 'remote-sensing', 'data-visualization'] },
+      { id: 'cryptography', image: baseImage('cybersecurity encryption code'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Cryptography', desc: 'Mathematical security infrastructure behind privacy, identity, payments, and trusted communication.', readTime: '6 min read', body: 'Cryptography secures communication, storage, identity, and verification in hostile or uncertain environments. It is foundational to the modern internet.', examples: ['Securing web traffic and messaging', 'Powering digital signatures and certificates', 'Protecting financial systems and wallets', 'Supporting privacy-preserving computation'], related: ['number-theory', 'cybersecurity', 'quantum-information'] },
+      { id: 'control-theory', image: baseImage('control systems robotics dashboard'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Control Theory', desc: 'The study of stability and feedback used in robotics, aerospace, manufacturing, and energy systems.', readTime: '5 min read', body: 'Control theory explains how to regulate dynamic systems so they remain stable, accurate, and responsive under disturbance.', examples: ['Keeping drones and vehicles stable', 'Regulating industrial process systems', 'Managing power grid frequency and response', 'Improving adaptive robotics'], related: ['systems-thinking', 'robotics', 'transportation-engineering'] },
+      { id: 'anthropology', image: baseImage('anthropology culture fieldwork'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Anthropology', desc: 'A study of culture, meaning, behavior, and social systems that informs design, policy, and global work.', readTime: '5 min read', body: 'Anthropology studies how people organize life through culture, symbols, institutions, and practice. It is valuable wherever context and human behavior matter.', examples: ['Improving product research and user understanding', 'Designing culturally aware interventions', 'Interpreting social change in communities', 'Supporting global development and policy work'], related: ['linguistics', 'archaeology', 'human-computer-interaction'] },
+      { id: 'cognitive-science', image: baseImage('brain cognition interface'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Cognitive Science', desc: 'An interdisciplinary study of mind and intelligence with applications in AI, education, and interface design.', readTime: '6 min read', body: 'Cognitive science brings together psychology, neuroscience, linguistics, philosophy, and computation to understand thought, memory, attention, and problem solving.', examples: ['Improving educational methods and assessment', 'Designing interfaces aligned with human attention', 'Informing AI models of reasoning and perception', 'Supporting cognitive rehabilitation and accessibility'], related: ['philosophy-of-mind', 'neuroscience', 'human-computer-interaction'] },
+      { id: 'data-visualization', image: baseImage('data visualization dashboard abstract'), tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Data Visualization', desc: 'Turning data into visual reasoning tools for science, policy, journalism, and operations.', readTime: '4 min read', body: 'Data visualization is not decoration. It is a discipline for making structure, comparison, uncertainty, and trend legible to humans.', examples: ['Helping teams reason about complex metrics', 'Communicating public policy and science clearly', 'Surfacing anomalies in operational systems', 'Improving map and dashboard usability'], related: ['semiotics', 'cartography', 'signal-processing'] },
+      { id: 'forensic-science', image: baseImage('forensic laboratory analysis'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Forensic Science', desc: 'Scientific methods used to analyze evidence, reconstruct events, and support legal investigation.', readTime: '5 min read', body: 'Forensic science combines chemistry, biology, imaging, and statistical reasoning to turn traces into evidence.', examples: ['Analyzing DNA and trace material', 'Reconstructing accident or crime scenes', 'Supporting digital evidence interpretation', 'Improving standards for evidence reliability'], related: ['computer-vision', 'signal-processing', 'linguistics'] },
+      { id: 'geopolitics', image: baseImage('global map geopolitics diplomacy'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Geopolitics', desc: 'How geography, power, resources, and institutions shape international relations and strategy.', readTime: '5 min read', body: 'Geopolitics analyzes how physical space, chokepoints, resources, trade routes, alliances, and state interests interact.', examples: ['Interpreting supply-chain vulnerability', 'Understanding energy and maritime strategy', 'Assessing alliance dynamics and competition', 'Framing long-term strategic risk'], related: ['game-theory', 'supply-chain-theory', 'environmental-economics'] },
+      { id: 'ecology', image: baseImage('forest ecosystem ecology'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Ecology', desc: 'The study of interactions among organisms and environments that informs conservation, agriculture, and climate adaptation.', readTime: '5 min read', body: 'Ecology studies relationships between living systems and their environments. Its methods help explain resilience, collapse, competition, cooperation, and disturbance.', examples: ['Supporting habitat restoration and conservation', 'Improving agricultural system design', 'Modeling species response to climate shifts', 'Understanding food webs and ecosystem services'], related: ['mycology', 'climate-science', 'environmental-economics'] },
+      { id: 'genomics', image: baseImage('genomics dna sequencing laboratory'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Genomics', desc: 'Whole-genome analysis is reshaping medicine, public health, agriculture, and evolutionary research.', readTime: '6 min read', body: 'Genomics studies the structure, function, and variation of entire genomes. It is central to precision medicine, pathogen surveillance, crop science, and population biology.', examples: ['Developing personalized treatment strategies', 'Tracking pathogen evolution during outbreaks', 'Improving crops and breeding programs', 'Understanding inherited disease risk'], related: ['bioinformatics', 'synthetic-biology', 'epidemiology'] },
+      { id: 'synthetic-biology', image: baseImage('synthetic biology lab biotech'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Synthetic Biology', desc: 'Engineering biological systems for medicine, materials, manufacturing, and environmental sensing.', readTime: '6 min read', body: 'Synthetic biology applies engineering principles to biological components and systems, enabling new therapies, diagnostics, materials, and production methods.', examples: ['Programming cells for therapeutic use', 'Engineering microbes for chemical manufacturing', 'Building low-cost biological sensors', 'Designing biological circuits and control systems'], related: ['genomics', 'bioinformatics', 'materials-science'] },
+      { id: 'materials-science', image: baseImage('materials science microscopy crystal'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Materials Science', desc: 'A field that determines how matter behaves, enabling better batteries, chips, buildings, and medical devices.', readTime: '6 min read', body: 'Materials science connects atomic structure to performance in real products. It sits beneath electronics, aerospace, energy storage, construction, and manufacturing.', examples: ['Improving battery chemistry and durability', 'Designing lighter and stronger composites', 'Developing semiconductors and photonic materials', 'Creating medical implant surfaces and coatings'], related: ['thermodynamics', 'biomimicry', 'optics'] },
+      { id: 'robotics', image: baseImage('robotics automation lab'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Robotics', desc: 'The integration of sensing, control, software, and mechanics for machines that act in the world.', readTime: '5 min read', body: 'Robotics combines hardware, perception, control, and planning to build machines that move and interact under uncertainty.', examples: ['Automating manufacturing and warehousing', 'Supporting surgery and rehabilitation', 'Enabling autonomous inspection and exploration', 'Building household and service robots'], related: ['control-theory', 'computer-vision', 'signal-processing'] },
+      { id: 'space-weather', image: baseImage('solar storm aurora satellite'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Space Weather', desc: 'Solar activity can disrupt satellites, power grids, radio systems, and navigation infrastructure.', readTime: '4 min read', body: 'Space weather studies the effects of solar radiation, geomagnetic storms, and charged particle events on Earth systems and technology.', examples: ['Protecting satellites and spacecraft electronics', 'Planning for power-grid disturbance', 'Managing aviation and radio communication risk', 'Improving resilience of navigation systems'], related: ['geodesy', 'astrodynamics', 'remote-sensing'] },
+      { id: 'astrodynamics', image: baseImage('orbit spacecraft astrodynamics'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Astrodynamics', desc: 'The physics of motion in space used for satellite operations, mission design, and orbital logistics.', readTime: '5 min read', body: 'Astrodynamics studies how spacecraft and satellites move under gravitational and propulsive forces, shaping navigation and mission planning in space.', examples: ['Designing transfer orbits and trajectories', 'Planning satellite constellations', 'Supporting rendezvous and docking operations', 'Managing orbital debris and station keeping'], related: ['space-weather', 'geodesy', 'transportation-engineering'] },
+      { id: 'oceanography', image: baseImage('ocean currents sea science'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Oceanography', desc: 'Understanding the ocean matters for climate, fisheries, storms, shipping, and planetary systems.', readTime: '5 min read', body: 'Oceanography studies physical, chemical, biological, and geological processes in the ocean, which is one of Earth’s core regulators.', examples: ['Modeling heat storage and climate feedback', 'Managing fisheries and marine ecosystems', 'Tracking storm development and coastal risk', 'Optimizing maritime operations and routing'], related: ['climate-science', 'fluid-dynamics', 'remote-sensing'] },
+      { id: 'epidemiology', image: baseImage('epidemiology public health data'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Epidemiology', desc: 'A science of disease patterns used in public health, risk assessment, and intervention design.', readTime: '5 min read', body: 'Epidemiology studies how health outcomes spread across populations, time, and environments. It underpins outbreak response, prevention, and health policy.', examples: ['Tracking outbreaks and intervention effects', 'Identifying population risk factors', 'Guiding vaccination and prevention strategies', 'Evaluating causal claims in public health'], related: ['network-science', 'genomics', 'behavioral-economics'] },
+      { id: 'supply-chain-theory', image: baseImage('shipping logistics containers supply chain'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Supply Chain Theory', desc: 'The logic of sourcing, flow, bottlenecks, resilience, and inventory across global systems.', readTime: '5 min read', body: 'Supply chain theory studies how goods, information, and constraints interact across suppliers, manufacturers, storage, and distribution networks.', examples: ['Reducing bottlenecks and lead times', 'Planning resilience under disruption', 'Balancing inventory against uncertainty', 'Improving logistics visibility and coordination'], related: ['graph-theory', 'geopolitics', 'transportation-engineering'] },
+      { id: 'decision-theory', image: baseImage('decision analysis uncertainty'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Decision Theory', desc: 'A framework for making choices under uncertainty with applications in finance, policy, medicine, and AI.', readTime: '5 min read', body: 'Decision theory studies how agents evaluate uncertainty, preferences, tradeoffs, and expected outcomes when choosing between actions.', examples: ['Improving risk-aware policy design', 'Supporting medical decision support systems', 'Structuring investment and forecasting choices', 'Guiding AI under uncertainty'], related: ['probability-theory', 'behavioral-economics', 'game-theory'] },
+      { id: 'probability-theory', image: baseImage('probability statistics abstract math'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Probability Theory', desc: 'The language of uncertainty behind finance, machine learning, insurance, and scientific inference.', readTime: '5 min read', body: 'Probability theory formalizes uncertainty and randomness. It is foundational to prediction, experimentation, modeling, forecasting, and signal extraction.', examples: ['Powering statistical inference and experimentation', 'Improving forecasting and risk management', 'Supporting machine learning and Bayesian models', 'Modeling reliability and uncertainty in systems'], related: ['decision-theory', 'information-theory', 'signal-processing'] },
+      { id: 'complex-systems', image: baseImage('complex systems particles network'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Complex Systems', desc: 'A field for understanding emergence, cascades, feedback, and nonlinear behavior in large systems.', readTime: '5 min read', body: 'Complex systems research studies how large interacting parts create behavior that cannot be understood by inspecting components alone.', examples: ['Modeling market instability and cascades', 'Understanding social tipping points', 'Improving resilience in infrastructure networks', 'Studying emergent biological organization'], related: ['network-science', 'systems-thinking', 'ecology'] },
+      { id: 'information-theory', image: baseImage('information theory communication signal'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Information Theory', desc: 'A science of information, compression, noise, and communication central to modern digital systems.', readTime: '5 min read', body: 'Information theory explains how information can be represented, compressed, transmitted, and recovered under noisy conditions.', examples: ['Improving communication protocols', 'Enabling data compression and coding', 'Quantifying uncertainty in models', 'Supporting machine learning and inference'], related: ['signal-processing', 'number-theory', 'thermodynamics'] },
+      { id: 'memetics', image: baseImage('memes culture internet symbols'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Memetics', desc: 'A lens for understanding how ideas replicate, mutate, and spread across media ecosystems.', readTime: '4 min read', body: 'Memetics treats ideas and cultural units as entities that compete, transform, and reproduce through communication systems.', examples: ['Studying online narrative spread', 'Analyzing persuasion and virality', 'Understanding culture formation in digital spaces', 'Tracking symbolic mutation across communities'], related: ['semiotics', 'cultural-evolution', 'network-science'] },
+      { id: 'cultural-evolution', image: baseImage('culture evolution archive anthropology'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Cultural Evolution', desc: 'How behaviors, norms, and ideas change over time through learning, selection, and transmission.', readTime: '5 min read', body: 'Cultural evolution studies how practices and beliefs move across groups and generations, helping explain large-scale social change.', examples: ['Understanding norm formation and persistence', 'Modeling language and technology adoption', 'Explaining institutional path dependence', 'Studying innovation diffusion across societies'], related: ['anthropology', 'memetics', 'linguistics'] },
+      { id: 'bioinformatics', image: baseImage('bioinformatics genome data visualization'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Bioinformatics', desc: 'Computational methods for making sense of genomic, molecular, and biomedical data.', readTime: '6 min read', body: 'Bioinformatics turns biological measurements into interpretable models through computation, statistics, and data systems.', examples: ['Analyzing genomic sequencing output', 'Detecting disease-associated variants', 'Supporting drug target discovery', 'Tracking microbial and viral evolution'], related: ['genomics', 'synthetic-biology', 'data-visualization'] },
+      { id: 'remote-sensing', image: baseImage('satellite remote sensing earth'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Remote Sensing', desc: 'Sensing the planet from afar using satellites, aircraft, and instruments for environment, agriculture, and risk.', readTime: '5 min read', body: 'Remote sensing extracts information about landscapes, infrastructure, atmosphere, and oceans from instruments that do not require direct contact.', examples: ['Monitoring crops, drought, and wildfire', 'Tracking land-use and urban expansion', 'Measuring ocean and atmospheric variables', 'Supporting disaster response and damage mapping'], related: ['cartography', 'geodesy', 'climate-science'] },
+      { id: 'environmental-economics', image: baseImage('environment economics climate city'), tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Environmental Economics', desc: 'A field that prices externalities, resources, incentives, and long-term environmental tradeoffs.', readTime: '5 min read', body: 'Environmental economics studies how policy and markets interact with pollution, conservation, shared resources, and climate risk.', examples: ['Designing carbon pricing and regulation', 'Evaluating conservation incentives', 'Modeling resource depletion and commons problems', 'Comparing policy costs across long time horizons'], related: ['behavioral-economics', 'climate-science', 'urban-planning'] },
+      { id: 'geochemistry', image: baseImage('geochemistry rock laboratory'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Geochemistry', desc: 'Chemical processes in Earth systems that matter for climate records, mining, water, and planetary science.', readTime: '5 min read', body: 'Geochemistry studies how elements move through rocks, oceans, atmosphere, and living systems to reveal process and history.', examples: ['Understanding carbon cycling in Earth systems', 'Analyzing groundwater and contamination', 'Supporting mineral exploration and extraction', 'Reconstructing environmental history from chemical signatures'], related: ['paleoclimatology', 'oceanography', 'materials-science'] },
+      { id: 'paleontology', image: baseImage('fossils paleontology museum'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Paleontology', desc: 'The study of ancient life informs evolution, extinction, adaptation, and Earth system history.', readTime: '5 min read', body: 'Paleontology uses fossils and geological context to understand how organisms and ecosystems changed across deep time.', examples: ['Studying extinction and recovery dynamics', 'Tracing evolutionary innovation', 'Understanding environmental adaptation', 'Improving public science communication through deep-time narratives'], related: ['paleoclimatology', 'ecology', 'geochemistry'] },
+      { id: 'archival-science', image: baseImage('archive documents preservation'), tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Archival Science', desc: 'How societies preserve records, memory, evidence, and institutional continuity over time.', readTime: '4 min read', body: 'Archival science studies preservation, organization, access, and authenticity of records across physical and digital environments.', examples: ['Preserving legal and historical evidence', 'Managing institutional knowledge continuity', 'Designing digital preservation systems', 'Supporting research access and provenance'], related: ['medieval-history', 'semiotics', 'cybersecurity'] },
+      { id: 'computational-linguistics', image: baseImage('nlp language model text'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Computational Linguistics', desc: 'Where language science and computation meet in translation, speech, search, and language models.', readTime: '6 min read', body: 'Computational linguistics applies formal models and data-driven methods to analyze and generate language.', examples: ['Building machine translation systems', 'Improving search and retrieval', 'Supporting speech recognition and synthesis', 'Developing safer, more capable language interfaces'], related: ['linguistics', 'signal-processing', 'computer-vision'] },
+      { id: 'signal-processing', image: baseImage('signal waveform audio radar'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Signal Processing', desc: 'Techniques for extracting information from sound, images, sensors, and communication streams.', readTime: '5 min read', body: 'Signal processing studies how to represent, filter, compress, reconstruct, and interpret signals under noise and constraint.', examples: ['Cleaning audio and speech signals', 'Powering radar and sensing systems', 'Supporting medical imaging reconstruction', 'Improving wireless communication performance'], related: ['information-theory', 'computer-vision', 'music-theory'] },
+      { id: 'computer-vision', image: baseImage('computer vision camera ai'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Computer Vision', desc: 'Teaching machines to interpret images and video for robotics, medicine, mapping, and industry.', readTime: '5 min read', body: 'Computer vision turns pixels into usable representations of objects, motion, geometry, and events.', examples: ['Supporting autonomous navigation', 'Improving quality control in manufacturing', 'Analyzing medical scans and pathology images', 'Mapping physical environments from visual data'], related: ['signal-processing', 'robotics', 'remote-sensing'] },
+      { id: 'distributed-systems', image: baseImage('servers distributed systems cloud'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Distributed Systems', desc: 'How modern software runs across many machines while coping with delay, failure, and scale.', readTime: '6 min read', body: 'Distributed systems engineering studies coordination, replication, consistency, reliability, and fault tolerance across networked computing environments.', examples: ['Powering cloud infrastructure and databases', 'Managing large-scale application reliability', 'Supporting real-time collaboration systems', 'Designing resilient event and messaging architectures'], related: ['graph-theory', 'cybersecurity', 'information-theory'] },
+      { id: 'human-computer-interaction', image: baseImage('interface design user research'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Human-Computer Interaction', desc: 'A field focused on how people perceive, use, and trust digital systems and interfaces.', readTime: '5 min read', body: 'HCI studies usability, cognition, interaction patterns, accessibility, trust, and system design from a human-centered perspective.', examples: ['Designing more intuitive products and workflows', 'Improving accessibility and inclusion', 'Reducing friction in critical digital services', 'Building safer and more trustworthy AI interfaces'], related: ['cognitive-science', 'anthropology', 'behavioral-economics'] },
+      { id: 'cybersecurity', image: baseImage('cybersecurity network defense'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Cybersecurity', desc: 'Protecting systems, identities, networks, and data in adversarial digital environments.', readTime: '5 min read', body: 'Cybersecurity studies threats, attack surfaces, trust boundaries, resilience, detection, and response across digital systems.', examples: ['Securing infrastructure and cloud systems', 'Protecting identity and access workflows', 'Detecting fraud and intrusions', 'Designing resilient systems under attack'], related: ['cryptography', 'distributed-systems', 'game-theory'] },
+      { id: 'climate-science', image: baseImage('climate science glacier atmosphere'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Climate Science', desc: 'The study of Earth’s climate system, feedback loops, and change over time.', readTime: '6 min read', body: 'Climate science integrates atmospheric physics, oceans, land systems, chemistry, and data records to understand planetary change.', examples: ['Projecting warming and regional impacts', 'Assessing infrastructure and agriculture risk', 'Modeling carbon and energy cycles', 'Guiding adaptation and resilience planning'], related: ['paleoclimatology', 'oceanography', 'environmental-economics'] },
+      { id: 'quantum-information', image: baseImage('quantum computing abstract light'), tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Quantum Information', desc: 'A field at the intersection of physics, mathematics, and computing for new models of communication and computation.', readTime: '6 min read', body: 'Quantum information studies how information behaves in quantum systems, opening different possibilities for computation, communication, and security.', examples: ['Developing quantum-resistant security strategies', 'Designing quantum algorithms', 'Modeling entanglement and information flow', 'Improving precision measurement and sensing'], related: ['cryptography', 'number-theory', 'optics'] },
+      { id: 'optics', image: baseImage('optics prism laser light'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Optics', desc: 'The science of light behind cameras, sensors, communications, microscopy, and displays.', readTime: '5 min read', body: 'Optics studies how light is generated, transmitted, manipulated, and detected across materials and systems.', examples: ['Improving imaging and microscopy', 'Powering fiber-optic communication', 'Designing sensors and lidar systems', 'Enabling advanced manufacturing and metrology'], related: ['computer-vision', 'metrology', 'materials-science'] },
+      { id: 'neuroscience', image: baseImage('neuroscience brain scan laboratory'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Neuroscience', desc: 'A field that studies the nervous system with applications in medicine, cognition, interfaces, and AI inspiration.', readTime: '6 min read', body: 'Neuroscience studies neural systems from molecules to behavior. It matters in medicine, mental health, learning, assistive technology, and machine intelligence research.', examples: ['Improving diagnosis of neurological disorders', 'Designing brain-computer interfaces', 'Studying learning, memory, and attention', 'Informing computational models of perception'], related: ['cognitive-science', 'philosophy-of-mind', 'topology'] },
+      { id: 'metrology', image: baseImage('measurement metrology precision lab'), tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Metrology', desc: 'The science of measurement that quietly supports manufacturing, labs, navigation, and trust in data.', readTime: '4 min read', body: 'Metrology ensures that measurements are accurate, comparable, traceable, and meaningful across systems and institutions.', examples: ['Improving manufacturing quality and calibration', 'Supporting national standards and laboratories', 'Enabling high-precision navigation and optics', 'Reducing measurement uncertainty in science'], related: ['optics', 'geodesy', 'materials-science'] },
+      { id: 'industrial-design', image: baseImage('industrial design prototype product'), tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Industrial Design', desc: 'The design of physical products where usability, aesthetics, manufacturing, and systems thinking meet.', readTime: '4 min read', body: 'Industrial design shapes how products feel, function, and fit into human workflows, markets, and manufacturing constraints.', examples: ['Designing better medical and consumer devices', 'Balancing form, cost, and manufacturability', 'Improving physical interaction and ergonomics', 'Reducing waste through better product lifecycle planning'], related: ['human-computer-interaction', 'biomimicry', 'materials-science'] },
+      { id: 'transportation-engineering', image: baseImage('transportation engineering highway rail'), tag: 'Tech', tagClass: 'tag-teal', color: 'teal', category: 'tech', title: 'Transportation Engineering', desc: 'How people and goods move through networks with constraints in capacity, safety, and time.', readTime: '5 min read', body: 'Transportation engineering studies the design, performance, and optimization of mobility systems across road, rail, air, and multimodal networks.', examples: ['Reducing traffic delay and congestion', 'Designing safer intersections and corridors', 'Improving freight movement efficiency', 'Planning resilient multimodal transit systems'], related: ['urban-planning', 'graph-theory', 'fluid-dynamics'] }
+    ];
+
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    const topicsById = Object.fromEntries(topics.map(topic => [topic.id, topic]));
+
+    function renderCards() {
+      const grid = document.getElementById('cardsGrid');
+      const q = searchQuery.trim().toLowerCase();
+      const filtered = topics.filter(t => {
+        const matchCat = activeCategory === 'all' || t.category === activeCategory;
+        const haystack = `${t.title} ${t.desc} ${t.tag} ${t.body} ${(t.examples || []).join(' ')}`.toLowerCase();
+        const matchSearch = !q || haystack.includes(q);
+        return matchCat && matchSearch;
+      });
+
+      document.getElementById('resultsCount').textContent = `${filtered.length} topic${filtered.length === 1 ? '' : 's'} visible`;
+
+      if (filtered.length === 0) {
+        grid.innerHTML = `<div class="empty-state">No topics match your current search and category filters.</div>`;
+        return;
+      }
+
+      grid.innerHTML = filtered.map(t => `
+        <article class="card" onclick="openModal('${t.id}')">
+          <div class="card-image">
+            <img src="${t.image}" alt="${t.title}">
+          </div>
+          <div class="card-content">
+            <span class="card-tag ${t.tagClass}">${t.tag}</span>
+            <h3>${t.title}</h3>
+            <p>${t.desc}</p>
+            <div class="card-footer">
+              <span class="card-meta">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+                ${t.readTime}
+              </span>
+              <div class="card-arrow" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"></path></svg>
+              </div>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function filterCategory(el, cat) {
+      document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
+      el.classList.add('active');
+      activeCategory = cat;
+      renderCards();
+    }
+
+    function filterCards() {
+      searchQuery = document.getElementById('searchInput').value;
+      renderCards();
+    }
+
+    function openModal(id) {
+      const t = topicsById[id];
+      if (!t) return;
+      document.getElementById('modalTag').textContent = t.tag;
+      document.getElementById('modalTag').className = `card-tag ${t.tagClass}`;
+      document.getElementById('modalTitle').textContent = t.title;
+      document.getElementById('modalBody').textContent = t.body;
+      const modalImage = document.getElementById('modalImage');
+      modalImage.src = t.image;
+      modalImage.alt = t.title;
+      document.getElementById('modalExamples').innerHTML = (t.examples || []).map(e => `<li>${e}</li>`).join('');
+      document.getElementById('modalRelated').innerHTML = (t.related || []).map(relId => {
+        const rel = topicsById[relId];
+        if (!rel) return '';
+        return `<button class="related-pill" onclick="openRelated(event, '${rel.id}')">${rel.title}</button>`;
+      }).join('');
+      document.getElementById('modalOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function openRelated(event, id) {
+      event.stopPropagation();
+      openModal(id);
+    }
+
+    function closeModal() {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeModalOnOverlay(e) {
+      if (e.target === document.getElementById('modalOverlay')) closeModal();
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('button');
+      const input = e.target.querySelector('input');
+      btn.textContent = 'Subscribed';
+      btn.style.background = 'linear-gradient(135deg, #54d6a1, #8ee3ff)';
+      btn.style.color = '#081019';
+      input.value = '';
+      setTimeout(() => {
+        btn.textContent = 'Subscribe';
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 2400);
+    }
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') closeModal();
+    });
+
+    document.getElementById('heroTopicCount').textContent = `${topics.length}+`;
+    document.getElementById('statsTopicCount').textContent = `${topics.length}+`;
+    renderCards();
+  </script>
+</body>
+</html>
