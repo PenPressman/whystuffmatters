@@ -6,50 +6,108 @@
   <title>Why Stuff Matters</title>
   <style>
     :root {
-      --bg: #0f0f13;
-      --surface: #18181f;
-      --surface2: #22222d;
-      --accent: #7c6af7;
-      --accent2: #f76a8a;
+      --bg: #05070b;
+      --surface: rgba(10, 14, 22, 0.82);
+      --surface2: rgba(18, 24, 36, 0.92);
+      --accent: #ffffff;
+      --accent2: #8aa4ff;
       --accent3: #6af7c8;
-      --text: #e8e8f0;
-      --muted: #8888a0;
-      --border: #2a2a38;
+      --text: #f3f6fb;
+      --muted: #98a4b8;
+      --border: rgba(255,255,255,0.1);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
     body {
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 78% 18%, rgba(89, 116, 255, 0.12), transparent 16%),
+        radial-gradient(circle at 82% 14%, rgba(255,255,255,0.08), transparent 4%),
+        radial-gradient(circle at 18% 22%, rgba(255,255,255,0.06), transparent 2%),
+        radial-gradient(circle at 25% 68%, rgba(255,255,255,0.05), transparent 2%),
+        radial-gradient(circle at 74% 62%, rgba(255,255,255,0.05), transparent 2%),
+        radial-gradient(circle at 12% 84%, rgba(255,255,255,0.04), transparent 2%),
+        linear-gradient(180deg, #02040a 0%, #060a12 42%, #090e17 100%);
       color: var(--text);
-      font-family: 'Segoe UI', system-ui, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       line-height: 1.6;
       min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: -140px;
+      right: -120px;
+      width: 620px;
+      height: 620px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 34% 32%, rgba(255,255,255,0.55) 0%, rgba(255,255,255,0.08) 10%, rgba(112,144,255,0.24) 32%, rgba(18,24,38,0.95) 58%, rgba(5,7,11,0) 73%);
+      box-shadow:
+        0 0 120px rgba(96, 123, 255, 0.18),
+        inset -80px -60px 120px rgba(0,0,0,0.55);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.95;
+      filter: blur(0.5px);
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 12%, rgba(255,255,255,0.18) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 15% 28%, rgba(255,255,255,0.14) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 28% 12%, rgba(255,255,255,0.13) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 88% 36%, rgba(255,255,255,0.14) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 52% 18%, rgba(255,255,255,0.10) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 8% 62%, rgba(255,255,255,0.12) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 36% 82%, rgba(255,255,255,0.10) 0 1px, transparent 1.5px),
+        radial-gradient(circle at 76% 78%, rgba(255,255,255,0.11) 0 1px, transparent 1.5px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.75;
+    }
+
+    nav,
+    .hero,
+    section,
+    footer,
+    .modal-overlay {
+      position: relative;
+      z-index: 1;
     }
 
     nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 15, 19, 0.85);
-      backdrop-filter: blur(12px);
+      background: rgba(5, 8, 14, 0.72);
+      backdrop-filter: blur(14px);
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      height: 60px;
+      height: 68px;
     }
 
     .logo {
-      font-size: 1.2rem;
+      font-size: 0.95rem;
       font-weight: 700;
-      letter-spacing: -0.5px;
+      letter-spacing: 1.8px;
+      text-transform: uppercase;
       color: var(--text);
       text-decoration: none;
     }
 
-    .logo span { color: var(--accent); }
+    .logo span { color: var(--accent2); }
 
     .nav-links {
       display: flex;
@@ -58,176 +116,188 @@
     }
 
     .nav-links a {
-      color: var(--muted);
+      color: rgba(255,255,255,0.78);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+      font-size: 0.82rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      transition: color 0.2s, opacity 0.2s;
     }
 
-    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover { color: #fff; }
 
     .nav-cta {
-      background: var(--accent);
+      background: transparent;
       color: #fff;
-      border: none;
-      padding: 0.45rem 1.1rem;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.45);
+      padding: 0.7rem 1.2rem;
+      border-radius: 999px;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       cursor: pointer;
-      transition: opacity 0.2s;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
       text-decoration: none;
     }
 
-    .nav-cta:hover { opacity: 0.85; }
+    .nav-cta:hover {
+      background: rgba(255,255,255,0.08);
+      border-color: #fff;
+      transform: translateY(-1px);
+    }
 
     .hero {
-      text-align: center;
-      padding: 6rem 2rem 4rem;
+      text-align: left;
+      padding: 8.5rem 2rem 6rem;
       position: relative;
       overflow: hidden;
+      min-height: 78vh;
+      display: flex;
+      align-items: center;
     }
 
     .hero::before {
       content: '';
       position: absolute;
-      top: -80px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 700px;
-      height: 400px;
-      background: radial-gradient(ellipse, rgba(124, 106, 247, 0.18) 0%, transparent 70%);
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(2,4,10,0.96) 0%, rgba(2,4,10,0.86) 42%, rgba(2,4,10,0.42) 72%, rgba(2,4,10,0.12) 100%);
       pointer-events: none;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+      margin-left: 0;
     }
 
     .hero-tag {
       display: inline-block;
-      background: rgba(124, 106, 247, 0.15);
-      border: 1px solid rgba(124, 106, 247, 0.35);
-      color: var(--accent);
-      font-size: 0.78rem;
-      font-weight: 600;
-      letter-spacing: 1px;
+      border: 1px solid rgba(255,255,255,0.18);
+      color: rgba(255,255,255,0.78);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
       text-transform: uppercase;
-      padding: 0.3rem 0.9rem;
-      border-radius: 100px;
-      margin-bottom: 1.5rem;
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.35rem;
+      background: rgba(255,255,255,0.04);
     }
 
     .hero h1 {
-      font-size: clamp(2.4rem, 6vw, 4rem);
+      font-size: clamp(2.9rem, 7vw, 5.4rem);
       font-weight: 800;
-      letter-spacing: -1.5px;
-      line-height: 1.15;
-      max-width: 750px;
-      margin: 0 auto 1.2rem;
+      letter-spacing: -2px;
+      line-height: 0.98;
+      max-width: 820px;
+      margin: 0 0 1.1rem;
+      text-transform: uppercase;
     }
 
     .hero h1 .highlight {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #cfe0ff;
+      background: none;
+      -webkit-background-clip: initial;
+      -webkit-text-fill-color: initial;
+      background-clip: initial;
     }
 
     .hero p {
       color: var(--muted);
-      font-size: 1.15rem;
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
+      font-size: 1.08rem;
+      max-width: 590px;
+      margin: 0 0 2.2rem;
     }
 
     .hero-buttons {
       display: flex;
       gap: 1rem;
-      justify-content: center;
+      justify-content: flex-start;
       flex-wrap: wrap;
     }
 
     .btn-primary {
-      background: var(--accent);
-      color: #fff;
+      background: #fff;
+      color: #05070b;
       border: none;
-      padding: 0.75rem 1.8rem;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 600;
+      padding: 0.95rem 1.55rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       cursor: pointer;
       transition: transform 0.15s, opacity 0.15s;
       text-decoration: none;
     }
 
-    .btn-primary:hover { transform: translateY(-1px); opacity: 0.9; }
+    .btn-primary:hover { transform: translateY(-1px); opacity: 0.92; }
 
     .btn-secondary {
       background: transparent;
       color: var(--text);
-      border: 1px solid var(--border);
-      padding: 0.75rem 1.8rem;
-      border-radius: 10px;
-      font-size: 1rem;
-      font-weight: 500;
+      border: 1px solid rgba(255,255,255,0.32);
+      padding: 0.95rem 1.55rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
       text-decoration: none;
     }
 
-    .btn-secondary:hover { border-color: var(--accent); background: rgba(124,106,247,0.06); }
+    .btn-secondary:hover { border-color: #fff; background: rgba(255,255,255,0.06); }
 
-    .stats {
-      display: flex;
-      justify-content: center;
-      gap: 3rem;
-      flex-wrap: wrap;
-      padding: 2.5rem 2rem;
-      border-top: 1px solid var(--border);
-      border-bottom: 1px solid var(--border);
-      margin: 2rem 0;
-    }
-
-    .stat { text-align: center; }
-    .stat-num { font-size: 1.9rem; font-weight: 800; color: var(--text); }
-    .stat-label { font-size: 0.82rem; color: var(--muted); }
-
-    section { padding: 4rem 2rem; max-width: 1100px; margin: 0 auto; }
+    section { padding: 5rem 2rem; max-width: 1180px; margin: 0 auto; }
 
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      letter-spacing: 1.8px;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.5rem;
+      color: #d9e4ff;
+      margin-bottom: 0.65rem;
     }
 
     .section-title {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-size: clamp(1.9rem, 3vw, 2.7rem);
       font-weight: 800;
-      letter-spacing: -0.5px;
-      margin-bottom: 0.7rem;
+      letter-spacing: -1px;
+      margin-bottom: 0.75rem;
+      text-transform: uppercase;
     }
 
     .section-sub {
       color: var(--muted);
       font-size: 1rem;
-      max-width: 500px;
+      max-width: 560px;
       margin-bottom: 2.5rem;
     }
 
     .search-bar {
       display: flex;
       align-items: center;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 0.7rem 1.2rem;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      padding: 0.85rem 1.2rem;
       gap: 0.75rem;
-      max-width: 560px;
+      max-width: 620px;
       margin: 0 auto 3rem;
-      transition: border-color 0.2s;
+      transition: border-color 0.2s, background 0.2s;
+      backdrop-filter: blur(10px);
     }
 
-    .search-bar:focus-within { border-color: var(--accent); }
+    .search-bar:focus-within {
+      border-color: rgba(255,255,255,0.4);
+      background: rgba(255,255,255,0.05);
+    }
+
     .search-bar svg { color: var(--muted); flex-shrink: 0; }
 
     .search-bar input {
@@ -243,27 +313,30 @@
 
     .categories {
       display: flex;
-      gap: 0.6rem;
+      gap: 0.7rem;
       flex-wrap: wrap;
-      margin-bottom: 2.5rem;
+      margin-bottom: 2.7rem;
       justify-content: center;
     }
 
     .cat-pill {
-      padding: 0.4rem 1rem;
-      border-radius: 100px;
-      border: 1px solid var(--border);
-      background: var(--surface);
-      color: var(--muted);
-      font-size: 0.85rem;
+      padding: 0.55rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.03);
+      color: rgba(255,255,255,0.72);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
       cursor: pointer;
       transition: all 0.2s;
     }
 
     .cat-pill:hover, .cat-pill.active {
-      border-color: var(--accent);
-      color: var(--accent);
-      background: rgba(124,106,247,0.1);
+      border-color: rgba(255,255,255,0.45);
+      color: #fff;
+      background: rgba(255,255,255,0.08);
     }
 
     .cards-grid {
@@ -273,101 +346,119 @@
     }
 
     .card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.055) 0%, rgba(255,255,255,0.025) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
       padding: 1.5rem;
       cursor: pointer;
-      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s;
+      transition: border-color 0.2s, transform 0.2s, box-shadow 0.2s, background 0.2s;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
     .card::before {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
-      border-radius: 14px 14px 0 0;
+      height: 2px;
+      border-radius: 20px 20px 0 0;
       opacity: 0;
       transition: opacity 0.2s;
+      background: linear-gradient(90deg, rgba(255,255,255,0.95), rgba(138,164,255,0.75));
     }
 
     .card:hover {
-      border-color: rgba(124,106,247,0.5);
-      transform: translateY(-3px);
-      box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+      border-color: rgba(255,255,255,0.28);
+      transform: translateY(-4px);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.34);
+      background: linear-gradient(180deg, rgba(255,255,255,0.07) 0%, rgba(255,255,255,0.03) 100%);
     }
 
     .card:hover::before { opacity: 1; }
-
-    .card.purple::before { background: linear-gradient(90deg, var(--accent), var(--accent2)); }
-    .card.pink::before   { background: linear-gradient(90deg, var(--accent2), #f7a56a); }
-    .card.teal::before   { background: linear-gradient(90deg, var(--accent3), var(--accent)); }
 
     .card-emoji { font-size: 2rem; margin-bottom: 0.9rem; display: block; }
 
     .card-tag {
       display: inline-block;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.5px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 1px;
       text-transform: uppercase;
-      padding: 0.2rem 0.65rem;
-      border-radius: 100px;
+      padding: 0.28rem 0.68rem;
+      border-radius: 999px;
       margin-bottom: 0.7rem;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .tag-purple { background: rgba(124,106,247,0.15); color: var(--accent); }
-    .tag-pink   { background: rgba(247,106,138,0.15); color: var(--accent2); }
-    .tag-teal   { background: rgba(106,247,200,0.15); color: var(--accent3); }
+    .tag-purple,
+    .tag-pink,
+    .tag-teal {
+      background: rgba(255,255,255,0.06);
+      color: #dbe6ff;
+    }
 
-    .card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.3px; }
-    .card p  { color: var(--muted); font-size: 0.88rem; line-height: 1.55; margin-bottom: 1rem; }
+    .card h3 {
+      font-size: 1.08rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.3px;
+    }
+
+    .card p  {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.55;
+      margin-bottom: 1rem;
+    }
 
     .card-footer {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      font-size: 0.8rem;
+      font-size: 0.78rem;
       color: var(--muted);
-      padding-top: 0.9rem;
-      border-top: 1px solid var(--border);
+      padding-top: 0.95rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .card-meta { display: flex; align-items: center; gap: 0.4rem; }
 
     .card-arrow {
-      width: 28px; height: 28px;
-      background: var(--surface2);
+      width: 30px; height: 30px;
+      background: rgba(255,255,255,0.06);
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      transition: background 0.2s, transform 0.2s;
     }
 
-    .card:hover .card-arrow { background: var(--accent); }
+    .card:hover .card-arrow {
+      background: rgba(255,255,255,0.15);
+      transform: translateX(2px);
+    }
 
     .featured-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 2.5rem;
+      background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, rgba(255,255,255,0.025) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 26px;
+      padding: 2.7rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 2rem;
       align-items: center;
       margin-bottom: 1.5rem;
       position: relative;
       overflow: hidden;
+      backdrop-filter: blur(10px);
     }
 
     .featured-card::after {
       content: '';
       position: absolute;
-      bottom: -60px; right: -60px;
-      width: 200px; height: 200px;
+      bottom: -90px; right: -90px;
+      width: 280px; height: 280px;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(124,106,247,0.12), transparent 70%);
+      background: radial-gradient(circle, rgba(128,155,255,0.18), transparent 68%);
       pointer-events: none;
     }
 
@@ -375,123 +466,104 @@
       display: inline-flex;
       align-items: center;
       gap: 0.4rem;
-      background: rgba(247,106,138,0.15);
-      color: var(--accent2);
-      font-size: 0.75rem;
-      font-weight: 700;
+      background: rgba(255,255,255,0.06);
+      color: #dbe6ff;
+      font-size: 0.72rem;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.8px;
-      padding: 0.3rem 0.8rem;
-      border-radius: 100px;
+      letter-spacing: 1px;
+      padding: 0.38rem 0.82rem;
+      border-radius: 999px;
       margin-bottom: 1rem;
+      border: 1px solid rgba(255,255,255,0.1);
     }
 
-    .featured-card h2 { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 0.75rem; }
-    .featured-card p  { color: var(--muted); font-size: 0.92rem; margin-bottom: 1.5rem; }
+    .featured-card h2 {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      margin-bottom: 0.8rem;
+      text-transform: uppercase;
+    }
+
+    .featured-card p  {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 1.5rem;
+      max-width: 580px;
+    }
 
     .featured-visual {
-      background: var(--surface2);
-      border-radius: 12px;
-      height: 200px;
+      background:
+        radial-gradient(circle at 38% 35%, rgba(255,255,255,0.48) 0%, rgba(255,255,255,0.06) 12%, rgba(138,164,255,0.22) 36%, rgba(14,18,28,0.98) 62%, transparent 74%);
+      border-radius: 50%;
+      height: 260px;
+      width: 260px;
+      margin-left: auto;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 4rem;
-      border: 1px solid var(--border);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 0 80px rgba(104, 135, 255, 0.14);
     }
 
     .steps {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
+      gap: 1.2rem;
       margin-top: 2rem;
     }
 
     .step {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.025) 100%);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: 20px;
       padding: 1.5rem;
+      backdrop-filter: blur(10px);
     }
 
     .step-num {
-      width: 36px; height: 36px;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      border-radius: 10px;
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 999px;
       display: flex;
       align-items: center;
       justify-content: center;
       font-weight: 800;
       font-size: 0.9rem;
       margin-bottom: 1rem;
+      color: #fff;
     }
 
-    .step h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.4rem; }
-    .step p  { font-size: 0.85rem; color: var(--muted); }
-
-    .newsletter {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 3rem 2rem;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
+    .step h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      margin-bottom: 0.45rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .newsletter::before {
-      content: '';
-      position: absolute;
-      top: -100px; left: 50%;
-      transform: translateX(-50%);
-      width: 400px; height: 300px;
-      background: radial-gradient(ellipse, rgba(124,106,247,0.12), transparent 70%);
-    }
-
-    .newsletter h2 { font-size: 1.7rem; font-weight: 800; margin-bottom: 0.5rem; }
-    .newsletter p  { color: var(--muted); margin-bottom: 1.5rem; }
-
-    .newsletter-form {
-      display: flex;
-      gap: 0.75rem;
-      max-width: 420px;
-      margin: 0 auto;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .newsletter-form input {
-      flex: 1;
-      min-width: 200px;
-      background: var(--surface2);
-      border: 1px solid var(--border);
-      color: var(--text);
-      padding: 0.7rem 1rem;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-
-    .newsletter-form input:focus { border-color: var(--accent); }
-    .newsletter-form input::placeholder { color: var(--muted); }
+    .step p  { font-size: 0.88rem; color: var(--muted); }
 
     footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding: 2.8rem 2rem;
       text-align: center;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.86rem;
+      background: rgba(0,0,0,0.16);
     }
 
-    footer a { color: var(--muted); text-decoration: none; }
-    footer a:hover { color: var(--text); }
+    footer a { color: rgba(255,255,255,0.84); text-decoration: none; }
+    footer a:hover { color: #fff; }
 
     .modal-overlay {
       position: fixed;
       inset: 0;
-      background: rgba(0,0,0,0.7);
-      backdrop-filter: blur(6px);
+      background: rgba(0,0,0,0.72);
+      backdrop-filter: blur(8px);
       z-index: 200;
       display: flex;
       align-items: center;
@@ -505,14 +577,15 @@
     .modal-overlay.open { opacity: 1; pointer-events: all; }
 
     .modal {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 18px;
+      background: linear-gradient(180deg, rgba(14,18,28,0.98) 0%, rgba(10,14,22,0.98) 100%);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 22px;
       padding: 2rem;
-      max-width: 540px;
+      max-width: 560px;
       width: 100%;
       transform: translateY(20px);
       transition: transform 0.25s;
+      box-shadow: 0 30px 80px rgba(0,0,0,0.45);
     }
 
     .modal-overlay.open .modal { transform: translateY(0); }
@@ -525,42 +598,75 @@
     }
 
     .modal-close {
-      background: var(--surface2);
+      background: rgba(255,255,255,0.06);
       border: none;
       color: var(--muted);
-      width: 32px; height: 32px;
-      border-radius: 8px;
+      width: 34px; height: 34px;
+      border-radius: 10px;
       cursor: pointer;
       font-size: 1.1rem;
       display: flex; align-items: center; justify-content: center;
-      transition: background 0.2s;
+      transition: background 0.2s, color 0.2s;
     }
 
-    .modal-close:hover { background: var(--border); color: var(--text); }
+    .modal-close:hover { background: rgba(255,255,255,0.12); color: var(--text); }
 
-    .modal h2 { font-size: 1.3rem; font-weight: 800; }
-    .modal .modal-body { color: var(--muted); font-size: 0.92rem; line-height: 1.65; }
+    .modal h2 { font-size: 1.35rem; font-weight: 800; }
+    .modal .modal-body { color: var(--muted); font-size: 0.94rem; line-height: 1.65; }
 
     .modal-examples {
       margin-top: 1.2rem;
       padding: 1rem;
-      background: var(--surface2);
-      border-radius: 10px;
-      border: 1px solid var(--border);
+      background: rgba(255,255,255,0.04);
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .modal-examples h4 { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; color: var(--accent); margin-bottom: 0.6rem; }
+    .modal-examples h4 {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: #dbe6ff;
+      margin-bottom: 0.7rem;
+    }
 
-    .modal-examples ul { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .modal-examples ul { list-style: none; display: flex; flex-direction: column; gap: 0.45rem; }
 
-    .modal-examples li { font-size: 0.88rem; color: var(--muted); display: flex; gap: 0.5rem; }
-    .modal-examples li::before { content: '→'; color: var(--accent); }
+    .modal-examples li {
+      font-size: 0.9rem;
+      color: var(--muted);
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .modal-examples li::before { content: '→'; color: #fff; }
+
+    @media (max-width: 860px) {
+      body::before {
+        width: 420px;
+        height: 420px;
+        top: -80px;
+        right: -120px;
+        opacity: 0.7;
+      }
+
+      .featured-card { grid-template-columns: 1fr; }
+      .featured-visual {
+        margin: 0 auto;
+        width: 220px;
+        height: 220px;
+      }
+    }
 
     @media (max-width: 680px) {
       .nav-links { display: none; }
-      .featured-card { grid-template-columns: 1fr; }
+      .hero {
+        min-height: auto;
+        padding-top: 7rem;
+        padding-bottom: 4.5rem;
+      }
+      .hero h1 { font-size: clamp(2.5rem, 12vw, 4rem); }
       .featured-visual { display: none; }
-      .stats { gap: 2rem; }
     }
   </style>
 </head>
@@ -573,24 +679,19 @@
       <li><a href="#how">How it works</a></li>
       <li><a href="#about">About</a></li>
     </ul>
-    <a href="#explore" class="nav-cta">Start Exploring</a>
+    <a href="#explore" class="nav-cta">Explore Topics</a>
   </nav>
 
   <div class="hero">
-    <div class="hero-tag">Real-world applications of niche knowledge</div>
-    <h1>Discover <span class="highlight">why the things<br/>you study matter</span></h1>
-    <p>Ever wondered what you actually <em>do</em> with a degree in medieval history, graph theory, or mycology? Find out here.</p>
-    <div class="hero-buttons">
-      <a href="#explore" class="btn-primary">Explore Topics</a>
-      <a href="#how" class="btn-secondary">How it works</a>
+    <div class="hero-inner">
+      <div class="hero-tag">Real-world applications of overlooked knowledge</div>
+      <h1>Discover <span class="highlight">why what you study matters</span></h1>
+      <p>Ever wondered what you actually <em>do</em> with a degree in medieval history, graph theory, or mycology? This is where the connections become clear.</p>
+      <div class="hero-buttons">
+        <a href="#explore" class="btn-primary">Explore Topics</a>
+        <a href="#how" class="btn-secondary">How it works</a>
+      </div>
     </div>
-  </div>
-
-  <div class="stats">
-    <div class="stat"><div class="stat-num">200+</div><div class="stat-label">Niche topics covered</div></div>
-    <div class="stat"><div class="stat-num">40+</div><div class="stat-label">Categories</div></div>
-    <div class="stat"><div class="stat-num">1,000+</div><div class="stat-label">Real-world applications</div></div>
-    <div class="stat"><div class="stat-num">Free</div><div class="stat-label">Always</div></div>
   </div>
 
   <section id="about">
@@ -599,17 +700,17 @@
       <div>
         <div class="featured-label">✦ This week's pick</div>
         <h2>Why Topology Actually Matters</h2>
-        <p>You've heard it's "the study of coffee cups and donuts." But topological thinking is reshaping how we understand data, design, and even the human brain.</p>
+        <p>You’ve heard it described as the study of coffee cups and donuts. In practice, topological thinking is helping reshape data analysis, materials research, and the way scientists model complex systems.</p>
         <a href="#" class="btn-primary" onclick="openModal('topology'); return false;">Read more</a>
       </div>
-      <div class="featured-visual">🍩</div>
+      <div class="featured-visual">🪐</div>
     </div>
   </section>
 
   <section id="explore">
     <div class="section-label">Explore</div>
-    <h2 class="section-title">Find your niche</h2>
-    <p class="section-sub">From the obscure to the overlooked — every field has surprising real-world impact.</p>
+    <h2 class="section-title">Find your field</h2>
+    <p class="section-sub">From the obscure to the overlooked, every area of study has real-world impact.</p>
     <div class="search-bar">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
         <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
@@ -631,30 +732,18 @@
   <section id="how">
     <div class="section-label">How it works</div>
     <h2 class="section-title">Knowledge connects everything</h2>
-    <p class="section-sub">We bridge the gap between "what you learn" and "what it's actually for."</p>
+    <p class="section-sub">We bridge the gap between what you learn and what it is actually used for.</p>
     <div class="steps">
-      <div class="step"><div class="step-num">1</div><h3>Pick a field</h3><p>Browse by category or search for any topic — no matter how niche or obscure.</p></div>
+      <div class="step"><div class="step-num">1</div><h3>Pick a field</h3><p>Browse by category or search for any topic, no matter how specialized or overlooked.</p></div>
       <div class="step"><div class="step-num">2</div><h3>See the applications</h3><p>We break down concrete, real-world uses across industries, careers, and everyday life.</p></div>
-      <div class="step"><div class="step-num">3</div><h3>Follow the threads</h3><p>Each topic connects to related fields, showing you the surprising web of knowledge.</p></div>
-      <div class="step"><div class="step-num">4</div><h3>Submit your own</h3><p>Know why something matters that isn't here yet? Share it with the community.</p></div>
-    </div>
-  </section>
-
-  <section>
-    <div class="newsletter">
-      <div class="section-label" style="display:block; margin-bottom:0.5rem;">Stay curious</div>
-      <h2>Get the weekly "Why it matters" digest</h2>
-      <p>One niche topic, three surprising applications, zero fluff.</p>
-      <form class="newsletter-form" onsubmit="handleSubscribe(event)">
-        <input type="email" placeholder="your@email.com" required />
-        <button type="submit" class="btn-primary">Subscribe</button>
-      </form>
+      <div class="step"><div class="step-num">3</div><h3>Follow the threads</h3><p>Each topic connects to related fields, showing the larger web of knowledge around it.</p></div>
+      <div class="step"><div class="step-num">4</div><h3>Share your own</h3><p>Know why something matters that is not here yet? Add it and expand the map.</p></div>
     </div>
   </section>
 
   <footer>
-    <p style="margin-bottom:0.4rem;"><strong style="color:var(--text)">why stuff matters</strong> — because nothing exists in a vacuum</p>
-    <p>Made with curiosity &nbsp;·&nbsp; <a href="#">Submit a topic</a> &nbsp;·&nbsp; <a href="#">About</a> &nbsp;·&nbsp; <a href="#">Contact</a></p>
+    <p style="margin-bottom:0.45rem;"><strong style="color:var(--text); letter-spacing:0.6px; text-transform:uppercase;">why stuff matters</strong> — because nothing exists in a vacuum</p>
+    <p>Made with curiosity &nbsp;·&nbsp; <a href="#">Submit a topic</a> &nbsp;·&nbsp; <a href="#">About</a> &nbsp;·&nbsp; <a href="mailto:penelope.pressman@gmail.com">penelope.pressman@gmail.com</a></p>
   </footer>
 
   <div class="modal-overlay" id="modalOverlay" onclick="closeModalOnOverlay(event)">
@@ -688,6 +777,130 @@
       { id: 'geodesy', emoji: '🌍', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Geodesy', desc: 'Measuring the exact shape of the Earth keeps GPS accurate, detects earthquakes before they happen, and tracks sea level rise to the millimeter.', readTime: '4 min read', body: 'Geodesy is the science of measuring and understanding the Earth\'s geometric shape, orientation in space, and gravitational field. Without it, your phone\'s GPS would be off by hundreds of meters. Satellite geodesy also monitors the melting of polar ice caps and detects magma movement under volcanoes.', examples: ['GPS corrections rely on continuous geodetic monitoring', 'GRACE satellite measures groundwater depletion by tracking gravity', 'Earthquake early warning uses geodetic strain measurement', 'Sea level rise measured to millimeter accuracy via satellite altimetry'] },
       { id: 'semiotics', emoji: '🔣', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Semiotics', desc: 'The study of signs and symbols shapes branding, interface design, propaganda analysis, and cross-cultural communication.', readTime: '5 min read', body: 'Semiotics — the science of meaning — asks how symbols carry significance. Saussure\'s signifier/signified distinction and Peirce\'s sign typology now inform everything from logo design to political communication analysis, content moderation policy, and even how emojis evolve in meaning.', examples: ['Brand identity design relies on semiotic consistency', 'UI icon universality studied using cross-cultural semiotics', 'Propaganda detection uses semiotic framing analysis', 'Emoji meaning drift tracked by computational semioticians'] },
       { id: 'number-theory', emoji: '🔢', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Number Theory', desc: 'Hardy called it the most useless branch of mathematics. It now encrypts every message on the internet.', readTime: '6 min read', body: 'G.H. Hardy famously declared number theory beautiful precisely because it had no practical applications. He was spectacularly wrong. RSA encryption, which secures internet banking and communications, rests entirely on the difficulty of factoring large primes — a pure number theory problem.', examples: ['RSA cryptography uses prime factorization hardness', 'Elliptic curve cryptography secures Bitcoin and TLS', 'Random number generation relies on number-theoretic constructions', 'Error-correcting codes in storage use finite field arithmetic'] },
+  ,
+      { id: 'archaeology', emoji: '🏺', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Archaeology', desc: 'Digging up the past now helps with climate adaptation, urban planning, conservation, and forensic investigation.', readTime: '5 min read', body: 'Archaeology is far more than ancient ruins and museum artifacts. Archaeologists reconstruct how people adapted to droughts, floods, migrations, and technological change. That knowledge now informs heritage preservation, resilience planning, forensic recovery, and even remote sensing techniques used in environmental monitoring.', examples: ['LiDAR surveys reveal buried settlements under modern forests', 'Ancient irrigation systems inspire water management in arid regions', 'Forensic archaeology helps recover evidence from conflict zones', 'Settlement collapse studies inform climate migration planning'] },
+      { id: 'epidemiology', emoji: '🦠', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Epidemiology', desc: 'The science of disease spread shapes public health, insurance, city planning, and crisis response.', readTime: '6 min read', body: 'Epidemiology studies patterns, causes, and effects of health conditions across populations. Its methods are crucial not only in pandemics, but also in traffic safety, environmental exposure analysis, and workplace health policy. It turns population-level uncertainty into usable decisions.', examples: ['Outbreak tracing models guide vaccination campaigns', 'Air pollution exposure studies influence zoning laws', 'Injury epidemiology improves road safety design', 'Health insurers use risk modeling based on population trends'] },
+      { id: 'entomology', emoji: '🐞', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Entomology', desc: 'Studying insects improves agriculture, robotics, ecology, and forensic science.', readTime: '5 min read', body: 'Entomology looks at the world’s most numerous animals: insects. Their behavior and biology matter for crop health, ecosystem monitoring, disease control, and biomimetic design. Even crime scene timelines can depend on insect life cycles.', examples: ['Pollinator studies improve crop yields and food security', 'Mosquito behavior research shapes disease prevention', 'Swarm robotics borrows from ant and bee coordination', 'Forensic entomology estimates time since death'] },
+      { id: 'oceanography', emoji: '🌊', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Oceanography', desc: 'Understanding the oceans is essential for climate forecasting, shipping, fisheries, and disaster preparedness.', readTime: '6 min read', body: 'Oceanography combines chemistry, physics, geology, and biology to understand the sea. Ocean currents move heat around the planet, influence storms, affect fisheries, and shape coastlines. Without oceanographic models, weather prediction and climate science would be dramatically weaker.', examples: ['Current models improve hurricane forecasting', 'Fisheries management depends on marine ecosystem monitoring', 'Seafloor mapping guides undersea cable placement', 'Tide and surge analysis supports coastal flood planning'] },
+      { id: 'ornithology', emoji: '🦉', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Ornithology', desc: 'Bird research helps track ecosystem change, aircraft safety, disease spread, and migration patterns.', readTime: '4 min read', body: 'Ornithology studies birds, but its applications are broad. Birds act as sensitive indicators of environmental health, carry information about migration and habitat loss, and affect aviation safety. Their movement patterns also help researchers understand ecological connectivity at continental scales.', examples: ['Bird migration data informs wind farm placement', 'Airport wildlife management reduces bird-strike risk', 'Avian population decline signals ecosystem stress', 'Migratory tracking reveals habitat corridors across countries'] },
+      { id: 'paleontology', emoji: '🦖', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Paleontology', desc: 'Fossils teach us about extinction, climate shifts, biomechanics, and the long-term future of life on Earth.', readTime: '5 min read', body: 'Paleontology studies ancient life, but its lessons are not trapped in the past. Fossil records reveal how ecosystems respond to warming, acidification, and mass extinction. Paleontologists also contribute to biomechanics, geology, and evolutionary modeling.', examples: ['Mass extinction studies inform biodiversity risk analysis', 'Fossil climate data improves long-term Earth system models', 'Dinosaur locomotion research inspires robotics design', 'Stratigraphic fossils help date oil and sediment layers'] },
+      { id: 'cartography', emoji: '🗺️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Cartography', desc: 'Mapmaking now powers logistics, disaster response, navigation apps, and political analysis.', readTime: '5 min read', body: 'Cartography is the art and science of representing space. Modern cartographers design the visual systems behind mapping tools, crisis dashboards, election maps, and route optimization platforms. A good map is not just accurate — it shapes how people make decisions.', examples: ['Emergency maps guide evacuation during wildfires and floods', 'Cartographic generalization keeps navigation apps readable', 'Election district maps affect public understanding of voting data', 'Humanitarian teams use mapping to coordinate aid delivery'] },
+      { id: 'rhetoric', emoji: '🎤', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Rhetoric', desc: 'The study of persuasion is central to politics, law, education, advertising, and platform moderation.', readTime: '5 min read', body: 'Rhetoric analyzes how language persuades, frames, and moves people. Ancient rhetorical principles still show up in campaign speeches, courtroom arguments, fundraising, social media, and product marketing. Understanding rhetoric helps reveal not just what people say, but how they shape belief.', examples: ['Political speechwriters use rhetorical framing to influence audiences', 'Lawyers structure arguments using classical appeals', 'Advertisers test persuasive messaging strategies', 'Media literacy programs teach rhetorical analysis against misinformation'] },
+      { id: 'ethnomusicology', emoji: '🥁', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Ethnomusicology', desc: 'Studying music across cultures helps preserve heritage, design better media, and understand identity.', readTime: '5 min read', body: 'Ethnomusicology explores how music functions within societies. It reveals how communities transmit memory, negotiate identity, and respond to change. That work matters for cultural preservation, education, game and film design, and cross-cultural communication.', examples: ['Archives preserve endangered musical traditions digitally', 'Film composers study regional styles for authentic scoring', 'Music programs support refugee cultural continuity', 'Anthropologists use song traditions to study collective memory'] },
+      { id: 'hydrology', emoji: '💧', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Hydrology', desc: 'Water movement research supports agriculture, flood control, infrastructure, and climate resilience.', readTime: '6 min read', body: 'Hydrology studies how water moves through landscapes, rivers, soils, and aquifers. Its models are vital for reservoir management, stormwater planning, drought forecasting, and pollution control. Nearly every city depends on hydrological thinking whether it realizes it or not.', examples: ['Floodplain models guide development restrictions', 'Groundwater monitoring helps prevent aquifer depletion', 'Stormwater systems are sized using hydrological projections', 'Drought planning depends on watershed-scale forecasting'] },
+      { id: 'cryptography', emoji: '🔐', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Cryptography', desc: 'Secure communication, digital identity, and modern finance all rely on hidden math.', readTime: '6 min read', body: 'Cryptography protects information by making it accessible only to intended parties. Beyond encrypted messaging, it powers digital signatures, identity verification, software security, and blockchains. It is one of the clearest examples of abstract math becoming indispensable infrastructure.', examples: ['End-to-end encrypted chat protects private communication', 'Digital signatures verify software updates', 'Secure payment systems depend on cryptographic protocols', 'Zero-knowledge proofs enable privacy-preserving verification'] },
+      { id: 'folklore', emoji: '📚', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Folklore', desc: 'Traditional stories and beliefs reveal how communities spread ideas, values, fears, and identity.', readTime: '4 min read', body: 'Folklore studies myths, legends, customs, and oral traditions. That makes it surprisingly useful for understanding rumor spread, moral narratives, branding, and community behavior. Folklorists track how stories evolve — which is incredibly relevant in the age of memes and viral misinformation.', examples: ['Rumor researchers compare online myths to folk tale transmission', 'Public historians preserve oral traditions in local archives', 'Game writers draw on folk motifs for worldbuilding', 'Cultural campaigns use folk symbolism to improve resonance'] },
+      { id: 'meteorology', emoji: '⛅', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Meteorology', desc: 'Weather science affects farming, aviation, insurance, shipping, and every emergency manager on Earth.', readTime: '5 min read', body: 'Meteorology studies the atmosphere and the processes that create weather. Forecasting is only the most visible part. Meteorological models also inform energy grids, cargo routing, climate adaptation, and severe weather alerts that save lives.', examples: ['Airlines reroute flights using real-time weather models', 'Farmers plan planting around precipitation forecasts', 'Utilities prepare electric grids for heat waves and storms', 'Early warning systems reduce tornado and flood casualties'] },
+      { id: 'seismology', emoji: '🌋', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Seismology', desc: 'Studying earthquakes improves building safety, infrastructure planning, and our understanding of the Earth itself.', readTime: '5 min read', body: 'Seismology tracks how vibrations move through Earth. That helps researchers understand tectonic activity, but also allows engineers and cities to reduce disaster risk. Seismic methods are also used to image underground structures far beyond earthquakes alone.', examples: ['Earthquake hazard maps shape building codes', 'Early warning systems can pause trains before shaking arrives', 'Seismic imaging helps locate underground resources and faults', 'Volcanic tremor monitoring supports eruption forecasting'] },
+      { id: 'demography', emoji: '👥', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Demography', desc: 'Population trends influence schools, housing, healthcare, pensions, and political power.', readTime: '5 min read', body: 'Demography examines births, deaths, migration, and population structure. Those patterns shape the future demand for labor, housing, education, healthcare, and public services. Governments and businesses both rely heavily on demographic forecasts.', examples: ['Cities use age-structure data to plan school capacity', 'Aging population forecasts inform pension reform', 'Retail expansion decisions follow migration and household trends', 'Public health systems prepare for changing population density'] },
+      { id: 'sociolinguistics', emoji: '🗨️', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Sociolinguistics', desc: 'How people speak signals identity, power, region, class, and belonging — with real effects in law and tech.', readTime: '5 min read', body: 'Sociolinguistics studies how language varies across communities and contexts. Accent bias, code-switching, slang formation, and speech style all affect hiring, education, AI speech recognition, and social inclusion. Language is never just language.', examples: ['Voice assistants improve by accounting for dialect variation', 'Court cases may hinge on interpretation of speech communities', 'Schools use sociolinguistic research to support bilingual students', 'Accent discrimination studies inform workplace policy'] },
+      { id: 'game-theory', emoji: '♟️', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Game Theory', desc: 'Strategic decision-making models shape diplomacy, auctions, pricing, and cybersecurity.', readTime: '6 min read', body: 'Game theory analyzes how choices change when multiple actors interact. It matters in economics, politics, negotiation, military planning, and online markets. Whenever your best move depends on what others might do, game theory is lurking nearby.', examples: ['Spectrum auctions use game-theoretic design', 'Diplomatic deterrence models rely on strategic interaction', 'Ride-share pricing reflects multi-agent competition', 'Cybersecurity defenders model attacker incentives using game theory'] },
+      { id: 'operations-research', emoji: '📈', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Operations Research', desc: 'This is the hidden science behind efficient airlines, warehouses, hospitals, and delivery systems.', readTime: '6 min read', body: 'Operations research uses optimization, statistics, and modeling to improve complex systems. It helps allocate limited resources, reduce delays, and design schedules that actually work. Much of modern logistics would collapse without it.', examples: ['Airlines optimize crew assignments and gate usage', 'Hospitals use OR models to schedule operating rooms', 'Warehouse picking routes reduce labor time and costs', 'Supply chains minimize delay through network optimization'] },
+      { id: 'materials-science', emoji: '🧱', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Materials Science', desc: 'The future of batteries, chips, buildings, and medicine depends on understanding matter at every scale.', readTime: '6 min read', body: 'Materials science explores how structure determines properties in metals, polymers, ceramics, and composites. It drives innovation in energy storage, aerospace, electronics, and biomedical devices. Better materials often unlock entirely new industries.', examples: ['Battery researchers engineer materials for longer EV range', 'Flexible polymers enable wearable sensors', 'Heat-resistant composites improve aircraft performance', 'Biomaterials make implants safer and more durable'] },
+      { id: 'ecology', emoji: '🌿', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Ecology', desc: 'Understanding ecosystems is essential for conservation, agriculture, disease control, and climate adaptation.', readTime: '5 min read', body: 'Ecology studies the relationships between organisms and their environments. Its insights help manage forests, fisheries, invasive species, and urban green space. It also explains why changing one part of an ecosystem can trigger much wider consequences.', examples: ['Food web analysis helps restore damaged habitats', 'Urban ecology improves heat mitigation through tree cover', 'Invasive species management protects agriculture and biodiversity', 'Disease ecology links habitat disruption to spillover risk'] },
+      { id: 'geology', emoji: '🪨', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Geology', desc: 'Rock layers help us find water, minerals, energy, and clues to Earth’s deep history.', readTime: '5 min read', body: 'Geology studies the structure, composition, and history of Earth. It matters for hazard assessment, construction, groundwater, mining, and environmental remediation. The ground beneath us is far more dynamic and useful than it looks.', examples: ['Geologists map fault lines for safer infrastructure', 'Mineral exploration supports battery supply chains', 'Groundwater aquifers are understood through geological surveys', 'Slope stability analysis prevents landslides near roads and homes'] },
+      { id: 'urban-planning', emoji: '🏙️', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Urban Planning', desc: 'City design affects traffic, housing, inequality, public health, and everyday quality of life.', readTime: '6 min read', body: 'Urban planning studies how cities grow and function. Planners coordinate land use, transit, housing, green space, and public services. Their decisions shape commutes, rents, emissions, and whether a city feels livable at all.', examples: ['Transit-oriented development reduces car dependency', 'Zoning reform influences housing affordability', 'Walkability planning improves health and local business activity', 'Heat-resilient city design reduces extreme summer risk'] },
+      { id: 'anthropology', emoji: '🧭', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Anthropology', desc: 'Studying human culture helps companies, hospitals, educators, and governments understand real behavior.', readTime: '5 min read', body: 'Anthropology looks at how people live, think, organize, and assign meaning. Anthropologists do fieldwork that reveals habits and assumptions often missed by surveys alone. That makes the discipline valuable for product design, development policy, and healthcare delivery.', examples: ['User researchers use ethnographic methods in product development', 'Medical anthropologists improve patient care across cultures', 'Development programs fail less when informed by local practices', 'Organizations use field interviews to understand workplace norms'] },
+      { id: 'psychometrics', emoji: '📝', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Psychometrics', desc: 'The science of measurement shapes testing, hiring, surveys, and mental health assessment.', readTime: '5 min read', body: 'Psychometrics focuses on how to measure things like ability, personality, and attitudes reliably. That matters anywhere tests or surveys affect decisions. Bad measurement leads to bad conclusions; psychometrics tries to prevent that.', examples: ['Standardized exams use item response theory', 'Employee assessments are validated through psychometric analysis', 'Mental health scales require reliability testing', 'Polling quality depends on careful survey design'] },
+      { id: 'statistics', emoji: '📊', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Statistics', desc: 'From medicine to sports to policy, statistics is how we tell signal from noise.', readTime: '6 min read', body: 'Statistics gives us the tools to draw conclusions from imperfect data. It underlies clinical trials, quality control, election polling, machine learning, and scientific research across almost every discipline. Without statistical thinking, evidence is just clutter.', examples: ['Clinical trials rely on statistical inference to test treatments', 'Manufacturers use control charts to detect defects', 'Sports teams model player performance and risk', 'A/B tests help companies compare product changes'] },
+      { id: 'probability-theory', emoji: '🎲', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Probability Theory', desc: 'Modern risk, insurance, AI, and scientific prediction all rest on quantified uncertainty.', readTime: '5 min read', body: 'Probability theory formalizes uncertainty. It tells us how to model rare events, estimate likelihoods, and reason under incomplete information. That matters everywhere from weather to finance to autonomous systems.', examples: ['Insurance pricing depends on probability of claims', 'Machine learning models use probabilistic reasoning under uncertainty', 'Weather forecasts communicate likelihood, not certainty', 'Risk analysts model tail events in finance and infrastructure'] },
+      { id: 'logic', emoji: '🧩', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Logic', desc: 'Formal reasoning powers programming languages, law, proofs, and digital circuits.', readTime: '5 min read', body: 'Logic studies valid inference and formal systems. It sits at the foundation of mathematics and computer science, but also matters in law, philosophy, and argument analysis. When systems need to be precise, logic usually shows up.', examples: ['Boolean logic underlies every digital processor', 'Formal verification checks software correctness', 'Legal reasoning often depends on logical structure', 'Database queries rely on logical expressions and constraints'] },
+      { id: 'combinatorics', emoji: '🧮', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Combinatorics', desc: 'Counting and arrangement problems drive scheduling, cryptography, coding theory, and algorithms.', readTime: '5 min read', body: 'Combinatorics studies discrete structures and how objects can be arranged or selected. It sounds elementary at first, but it becomes essential whenever systems scale. Many optimization and computer science problems are fundamentally combinatorial.', examples: ['Tournament scheduling depends on combinatorial design', 'Error-correcting codes use combinatorial constructions', 'Search algorithms face combinatorial explosion in large spaces', 'Cryptographic protocols rely on discrete combinatorial properties'] },
+      { id: 'algebraic-geometry', emoji: '📐', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Algebraic Geometry', desc: 'One of the most abstract branches of math now appears in cryptography, robotics, and physics.', readTime: '7 min read', body: 'Algebraic geometry studies geometric objects defined by polynomial equations. Though famously abstract, it has become important in coding theory, computer vision, robotics motion planning, and string theory. Pure math often becomes applied later than anyone expects.', examples: ['Elliptic curves in encryption come from algebraic geometry', 'Robot motion constraints can be modeled algebraically', 'Coding theory uses algebraic curves for robust communication', 'Theoretical physics relies on geometric structures of solution spaces'] },
+      { id: 'category-theory', emoji: '🧱', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Category Theory', desc: 'A high-level language of structure and transformation that now influences software design and mathematics.', readTime: '6 min read', body: 'Category theory abstracts relationships between systems rather than focusing only on the systems themselves. That perspective has proven useful in programming languages, database design, and formal mathematics. It is a discipline about patterns of patterns.', examples: ['Functional programming borrows concepts like monads', 'Database schema mapping can be expressed categorically', 'Mathematicians unify fields through shared structural language', 'Formal proof systems use category-inspired abstractions'] },
+      { id: 'linear-algebra', emoji: '📏', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Linear Algebra', desc: 'Search engines, graphics, AI, and quantum mechanics all run on vectors and matrices.', readTime: '5 min read', body: 'Linear algebra studies vectors, matrices, and linear transformations. It is one of the most applied areas of mathematics, powering machine learning, computer graphics, optimization, physics, and signal processing. It is hard to name a technical field untouched by it.', examples: ['Neural networks depend on matrix multiplication', '3D graphics use linear transformations for rendering', 'Recommendation systems rely on matrix factorization', 'Quantum states are modeled using vector spaces'] },
+      { id: 'differential-equations', emoji: '📉', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Differential Equations', desc: 'Whenever something changes over time, differential equations are probably involved.', readTime: '6 min read', body: 'Differential equations describe systems that evolve. They are central in mechanics, biology, economics, control systems, and climate science. From falling objects to population growth to electric circuits, dynamic systems often become equations about rates of change.', examples: ['Epidemic models track disease spread over time', 'Control systems in drones solve differential equations continuously', 'Climate models simulate atmospheric dynamics with PDEs', 'Finance uses stochastic differential equations for option pricing'] },
+      { id: 'signal-processing', emoji: '📡', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Signal Processing', desc: 'The science of extracting meaning from sound, images, radio, and sensor data powers modern technology.', readTime: '6 min read', body: 'Signal processing turns raw waves and measurements into usable information. It is behind noise cancellation, medical imaging, wireless communication, and computer vision. In a sensor-filled world, this field is everywhere.', examples: ['MRI reconstruction relies on signal transforms', 'Noise reduction improves calls and hearing aids', 'Radar and sonar analyze reflected signals for detection', 'Compression standards reduce image and audio file sizes'] },
+      { id: 'control-theory', emoji: '🎛️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Control Theory', desc: 'Keeping systems stable is crucial for aircraft, robots, factories, and power grids.', readTime: '5 min read', body: 'Control theory studies how to guide dynamic systems toward desired behavior. It keeps planes level, chemical plants stable, thermostats effective, and robots balanced. The discipline is about feedback — one of the most powerful ideas in engineering.', examples: ['Autopilots continuously adjust aircraft behavior', 'Industrial plants use feedback loops to maintain safe conditions', 'Self-balancing robots depend on control algorithms', 'Grid frequency stability relies on control systems'] },
+      { id: 'human-computer-interaction', emoji: '🖱️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Human-Computer Interaction', desc: 'Good technology is not just functional — it must fit human attention, perception, and behavior.', readTime: '5 min read', body: 'HCI studies how people use digital systems and how those systems should respond. It blends psychology, design, and computing to make tools more effective and less frustrating. Many product failures are really HCI failures.', examples: ['Accessibility features improve usability for everyone', 'Interface testing reduces user error in medical software', 'Dashboard design affects how quickly analysts spot problems', 'Gesture and voice interfaces depend on HCI research'] },
+      { id: 'computer-vision', emoji: '📷', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Computer Vision', desc: 'Teaching machines to interpret images powers medicine, manufacturing, security, and self-driving systems.', readTime: '6 min read', body: 'Computer vision turns pixels into meaning. It helps machines recognize objects, track movement, inspect defects, and interpret scenes. Applications span health care, logistics, agriculture, and consumer technology.', examples: ['Medical scans are analyzed for early disease detection', 'Factories use machine vision for quality inspection', 'Autonomous vehicles identify lanes, signs, and pedestrians', 'Retail systems track shelf inventory visually'] },
+      { id: 'natural-language-processing', emoji: '⌨️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Natural Language Processing', desc: 'The field behind search, translation, chatbots, summarization, and large language models.', readTime: '6 min read', body: 'NLP helps computers process and generate human language. It includes everything from spam filters to translation systems to modern AI assistants. Because so much knowledge is stored in text, NLP is a gateway technology for the information age.', examples: ['Customer support bots answer common questions automatically', 'Translation systems reduce language barriers in real time', 'Search engines rank and interpret query intent', 'Legal and medical documents can be summarized for faster review'] },
+      { id: 'distributed-systems', emoji: '🖧', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Distributed Systems', desc: 'The internet works because many computers coordinate without falling apart.', readTime: '6 min read', body: 'Distributed systems study how multiple machines cooperate across networks. This is essential for cloud platforms, databases, streaming services, and large-scale applications. The hard part is not just speed — it is consistency, reliability, and fault tolerance.', examples: ['Cloud services replicate data across regions for resilience', 'Streaming platforms coordinate servers worldwide', 'Consensus protocols keep distributed databases synchronized', 'Large websites stay online through load balancing and redundancy'] },
+      { id: 'cybersecurity', emoji: '🛡️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Cybersecurity', desc: 'Protecting systems from attack is now basic infrastructure for hospitals, governments, and businesses.', readTime: '5 min read', body: 'Cybersecurity covers the tools and practices that defend digital systems from theft, sabotage, and disruption. As more of life moves online, cybersecurity has become a matter of public safety as much as business continuity.', examples: ['Hospitals secure patient data and connected devices', 'Phishing detection protects employees from fraud', 'Critical infrastructure requires resilient network defense', 'Incident response teams contain and recover from breaches'] },
+      { id: 'bioinformatics', emoji: '🧬', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Bioinformatics', desc: 'Biology became a data science, and bioinformatics is how we make sense of the deluge.', readTime: '6 min read', body: 'Bioinformatics combines biology, computing, and statistics to analyze genetic and molecular data. It is central to genomics, personalized medicine, drug discovery, and evolutionary research. Sequencing alone is useless without interpretation.', examples: ['Genome comparison identifies disease-linked variants', 'Cancer treatment plans increasingly use molecular profiles', 'Pathogen sequencing helps track outbreaks', 'Protein structure prediction accelerates drug research'] },
+      { id: 'biophysics', emoji: '⚛️', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Biophysics', desc: 'Physics helps explain life, from protein folding to how cells move and communicate.', readTime: '5 min read', body: 'Biophysics applies physical principles to biological systems. It helps researchers understand the mechanics of cells, the dynamics of membranes, and the structure of biomolecules. This matters for medicine, biotechnology, and basic science.', examples: ['Protein folding models guide drug development', 'Cell mechanics research informs cancer metastasis studies', 'Single-molecule imaging reveals how enzymes function', 'Membrane transport analysis supports targeted therapy design'] },
+      { id: 'neuroscience', emoji: '🧠', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Neuroscience', desc: 'Studying the brain reshapes medicine, AI, education, and our understanding of consciousness.', readTime: '6 min read', body: 'Neuroscience investigates the nervous system across levels, from molecules to behavior. Its insights drive treatments for neurological disease, inform learning research, and inspire computational models. The brain is both a biological organ and a grand engineering puzzle.', examples: ['Brain imaging helps diagnose neurological disorders', 'Neural plasticity research informs rehabilitation after injury', 'Cognitive neuroscience influences classroom design', 'Brain-inspired architectures inform AI research'] },
+      { id: 'pharmacology', emoji: '💊', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Pharmacology', desc: 'Understanding how drugs work is essential to medicine, toxicology, and public health.', readTime: '5 min read', body: 'Pharmacology studies how chemicals interact with living systems. It explains dosage, side effects, efficacy, and toxicity. Beyond medicine, it also matters in regulation, sports, environmental exposure, and addiction science.', examples: ['Drug interaction analysis prevents harmful prescriptions', 'Clinical dosing depends on pharmacokinetics', 'Toxicologists assess chemical exposure risks', 'New therapies target receptors discovered through pharmacology'] },
+      { id: 'immunology', emoji: '🛡️', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Immunology', desc: 'The immune system is central to vaccines, cancer therapy, autoimmune disease, and global health.', readTime: '6 min read', body: 'Immunology studies how bodies recognize and respond to threats. It is critical for vaccine design, infection control, transplant medicine, and emerging cancer therapies. A huge share of modern medicine depends on immune understanding.', examples: ['Vaccines train immune memory against pathogens', 'Immunotherapies help the body attack cancer cells', 'Autoimmune disease research improves targeted treatments', 'Transplant success relies on controlling immune rejection'] },
+      { id: 'virology', emoji: '🧫', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Virology', desc: 'Viruses shape medicine, agriculture, evolution, and biotechnology far beyond outbreaks.', readTime: '5 min read', body: 'Virology studies viruses and their interactions with hosts. Beyond disease, viruses are tools in gene therapy, evolutionary biology, and molecular research. Understanding them is important for both defense and innovation.', examples: ['Virus sequencing helps track mutations and variants', 'Viral vectors are used in gene therapy', 'Crop virology protects food systems from plant disease', 'Phage therapy explores viruses that target bacteria'] },
+      { id: 'genetics', emoji: '🧬', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Genetics', desc: 'Inheritance and variation influence medicine, agriculture, ancestry, and evolution.', readTime: '5 min read', body: 'Genetics studies how traits are passed on and how biological information changes. Its impact spans newborn screening, plant breeding, disease risk, and conservation biology. Genetics is one of the foundations of modern life science.', examples: ['Gene panels identify inherited disease risk', 'Crop breeding improves drought resistance', 'Population genetics helps conserve endangered species', 'Forensic DNA supports criminal investigation and identification'] },
+      { id: 'microbiology', emoji: '🧪', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Microbiology', desc: 'Microscopic life affects health, fermentation, wastewater treatment, and the global carbon cycle.', readTime: '5 min read', body: 'Microbiology studies bacteria, archaea, fungi, and other microscopic organisms. These organisms cause disease, but they also make yogurt, clean water, and support ecosystems. Much of life’s chemistry is microbial.', examples: ['Wastewater treatment depends on microbial communities', 'Fermentation industries rely on controlled microbes', 'Microbiome research influences nutrition and medicine', 'Industrial bioreactors use microbes to make useful compounds'] },
+      { id: 'agronomy', emoji: '🌾', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Agronomy', desc: 'Growing crops well requires soil science, climate knowledge, genetics, and careful resource management.', readTime: '5 min read', body: 'Agronomy focuses on crops and soils, with the aim of making agriculture more productive and sustainable. It matters for food security, climate resilience, and fertilizer efficiency. In a warming world, agronomy becomes even more important.', examples: ['Crop rotation improves soil health and yields', 'Precision farming reduces fertilizer waste', 'Drought-tolerant varieties support climate adaptation', 'Field trials guide better planting and irrigation decisions'] },
+      { id: 'soil-science', emoji: '🟫', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Soil Science', desc: 'Healthy soil supports food systems, carbon storage, water filtration, and ecosystem recovery.', readTime: '5 min read', body: 'Soil science studies the composition, structure, and function of soil. It is essential for agriculture, land restoration, flood control, and climate mitigation. Soil is not dirt — it is a living system with enormous economic and ecological value.', examples: ['Soil testing guides smarter fertilizer use', 'Carbon sequestration projects depend on soil management', 'Erosion control protects farms and waterways', 'Construction projects assess soil stability before building'] },
+      { id: 'forestry', emoji: '🌲', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Forestry', desc: 'Managing forests affects timber, biodiversity, wildfire risk, water quality, and carbon storage.', readTime: '5 min read', body: 'Forestry is the science and practice of caring for forests. It balances ecological protection with economic use and public safety. Foresters work on wildfire prevention, habitat conservation, and sustainable resource planning.', examples: ['Fuel reduction strategies lower wildfire severity', 'Forest inventories support sustainable timber harvests', 'Watershed forests protect drinking water quality', 'Habitat planning preserves biodiversity across managed lands'] },
+      { id: 'marine-biology', emoji: '🐠', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Marine Biology', desc: 'Life in the ocean informs conservation, fisheries, biotechnology, and climate research.', readTime: '5 min read', body: 'Marine biology studies organisms in saltwater ecosystems, from coral reefs to deep-sea vents. Because oceans regulate climate and support food systems, marine biology is central to environmental stewardship and economic planning.', examples: ['Coral reef monitoring helps protect coastal ecosystems', 'Fish population models guide sustainable catch limits', 'Marine organisms inspire biomedical compounds', 'Kelp forest research informs coastal restoration'] },
+      { id: 'zoology', emoji: '🦓', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Zoology', desc: 'Animal biology helps with conservation, veterinary medicine, disease ecology, and biomimicry.', readTime: '4 min read', body: 'Zoology studies animal life across anatomy, behavior, evolution, and ecology. The field supports wildlife conservation, livestock health, and emerging technologies inspired by nature. It also helps explain how ecosystems function through animal interactions.', examples: ['Wildlife tracking informs conservation corridors', 'Animal physiology helps veterinarians improve care', 'Biomimetic engineers learn from animal movement', 'Zoonotic disease risk depends on animal host studies'] },
+      { id: 'botany', emoji: '🌱', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Botany', desc: 'Plant science underpins food, medicine, ecosystems, materials, and climate resilience.', readTime: '5 min read', body: 'Botany studies plant structure, growth, classification, and function. Plants feed us, stabilize ecosystems, and provide compounds used in medicine and industry. Understanding them is crucial for agriculture and environmental health.', examples: ['Crop improvement relies on plant physiology', 'Medicinal plants remain important in drug discovery', 'Urban greening strategies depend on species selection', 'Seed banks preserve plant diversity against future shocks'] },
+      { id: 'paleoclimatology', emoji: '🧊', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Paleoclimatology', desc: 'Ancient climate records help predict future climate risk and understand Earth’s sensitivity to change.', readTime: '6 min read', body: 'Paleoclimatology reconstructs past climates using ice cores, sediments, tree rings, and fossils. These records reveal how Earth responded to previous warming and cooling episodes. That makes them essential context for current climate change.', examples: ['Ice cores preserve atmospheric history across millennia', 'Tree rings reconstruct drought patterns over centuries', 'Sediment records improve long-term climate models', 'Ancient warming events help estimate tipping-point risks'] },
+      { id: 'forensic-science', emoji: '🔬', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Forensic Science', desc: 'Applying science to legal evidence affects justice, public safety, and investigative accuracy.', readTime: '5 min read', body: 'Forensic science uses chemistry, biology, physics, and statistics to analyze evidence. It matters in criminal investigations, disaster victim identification, and legal proceedings. Done well, it can clarify events; done poorly, it can distort justice.', examples: ['DNA analysis links suspects or exonerates the innocent', 'Trace evidence can reconstruct movement through crime scenes', 'Digital forensics recovers deleted or hidden data', 'Fire investigations use chemistry and burn-pattern analysis'] },
+      { id: 'criminology', emoji: '🚓', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Criminology', desc: 'Understanding why crime happens helps improve prevention, policing, and justice policy.', readTime: '5 min read', body: 'Criminology examines crime as a social phenomenon. It studies causes, patterns, institutions, and responses. This helps policymakers design safer communities without relying solely on punishment.', examples: ['Hotspot analysis improves targeted prevention strategies', 'Youth intervention programs draw on criminological evidence', 'Reentry research informs prison and parole reform', 'Victimization studies reveal underreported harms'] },
+      { id: 'political-science', emoji: '🏛️', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Political Science', desc: 'Power, institutions, and public decision-making shape everything from taxes to war to voting systems.', readTime: '6 min read', body: 'Political science studies governments, institutions, conflict, behavior, and policy. Its insights help explain why states succeed or fail, why people vote the way they do, and how power operates formally and informally.', examples: ['Election studies reveal turnout barriers and voting behavior', 'Institutional design affects policy stability and corruption risk', 'International relations models inform diplomacy and deterrence', 'Public opinion research shapes campaign strategy'] },
+      { id: 'international-relations', emoji: '🌐', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'International Relations', desc: 'Trade, war, alliances, sanctions, and diplomacy all depend on understanding relations between states.', readTime: '5 min read', body: 'International relations looks at how countries and other actors interact. It matters for foreign policy, security, trade, migration, and global governance. In an interconnected world, IR is never just theoretical.', examples: ['Alliance strategy shapes military planning', 'Sanctions analysis helps predict economic pressure outcomes', 'Trade negotiations depend on geopolitical incentives', 'Conflict early-warning systems draw on IR research'] },
+      { id: 'public-policy', emoji: '📜', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Public Policy', desc: 'Turning ideas into workable rules is a discipline of its own.', readTime: '5 min read', body: 'Public policy studies how governments design, implement, and evaluate interventions. It connects evidence to action, but also reveals how politics, bureaucracy, and incentives shape outcomes. Good policy is rarely just good intentions.', examples: ['Policy pilots test interventions before national rollout', 'Cost-benefit analysis informs infrastructure decisions', 'Behavioral insights improve form design and take-up rates', 'Program evaluation reveals whether policies actually work'] },
+      { id: 'public-administration', emoji: '🏢', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Public Administration', desc: 'Governments only work when someone can actually run the systems behind them.', readTime: '5 min read', body: 'Public administration focuses on how agencies operate, deliver services, manage staff, and implement law. It is the practical side of governance — the part that determines whether programs reach real people or get lost in bureaucracy.', examples: ['Emergency agencies coordinate response using administrative systems', 'Procurement reform reduces waste and corruption risk', 'School districts depend on effective public administration', 'Service delivery design affects public trust in government'] },
+      { id: 'econometrics', emoji: '💹', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Econometrics', desc: 'This is how economists test whether policies and market changes actually cause anything.', readTime: '6 min read', body: 'Econometrics applies statistical methods to economic data in order to estimate causal relationships. It helps distinguish correlation from causation in messy real-world systems. That matters for policy, finance, labor markets, and business strategy.', examples: ['Minimum wage studies use causal inference tools', 'Central banks analyze inflation dynamics econometrically', 'Marketing teams estimate campaign effectiveness from real data', 'Education policy researchers evaluate interventions with quasi-experiments'] },
+      { id: 'labor-economics', emoji: '💼', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Labor Economics', desc: 'Jobs, wages, incentives, training, and inequality all sit at the heart of labor markets.', readTime: '5 min read', body: 'Labor economics studies how workers and employers interact. It helps explain unemployment, pay differences, hiring incentives, and the effects of training, regulation, and automation. These questions shape everyday life for millions of people.', examples: ['Training programs are evaluated for real wage gains', 'Automation changes demand for certain skill sets', 'Paid leave policy affects labor force participation', 'Job-search platforms use labor market data to match candidates'] },
+      { id: 'development-economics', emoji: '🌍', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Development Economics', desc: 'Why some regions prosper and others struggle has enormous consequences for policy and human welfare.', readTime: '6 min read', body: 'Development economics studies poverty, growth, institutions, education, health, and infrastructure in lower-income settings. It aims to understand what improves living standards and why interventions succeed or fail.', examples: ['Cash transfer programs are tested for poverty reduction', 'School attendance incentives shape education policy', 'Infrastructure investment studies inform rural development', 'Microcredit outcomes are analyzed with field experiments'] },
+      { id: 'cultural-geography', emoji: '🧳', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Cultural Geography', desc: 'Place is not just physical — it is social, symbolic, political, and deeply lived.', readTime: '5 min read', body: 'Cultural geography studies how people create meaning through place and space. It explains neighborhood identity, migration experience, tourism, and the politics of maps and borders. Geography is always human as well as physical.', examples: ['Tourism planners study place identity and cultural representation', 'Migration research maps transnational communities', 'Neighborhood change is tracked through cultural landscape analysis', 'Public spaces are designed with social meaning in mind'] },
+      { id: 'human-geography', emoji: '📍', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Human Geography', desc: 'Where people live, move, work, and cluster shapes economies, politics, and social life.', readTime: '5 min read', body: 'Human geography studies spatial patterns of human activity. It connects population, migration, development, transport, and inequality to place. It is a bridge discipline between social science and spatial analysis.', examples: ['Commute mapping informs transit investments', 'Retail locations are chosen using geographic demand analysis', 'Migration flows reshape city service needs', 'Segregation studies reveal spatial inequality'] },
+      { id: 'media-studies', emoji: '📺', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Media Studies', desc: 'Understanding how media frames reality is crucial for politics, culture, and attention itself.', readTime: '5 min read', body: 'Media studies examines film, television, platforms, journalism, and digital culture. It asks how media shapes perception, identity, and power. In a world saturated with content, those questions are practical, not optional.', examples: ['News framing analysis affects public understanding of events', 'Platform culture research informs moderation debates', 'Advertising literacy programs draw on media studies', 'Streaming companies analyze audience behavior and genre perception'] },
+      { id: 'film-studies', emoji: '🎬', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Film Studies', desc: 'Cinema teaches visual language, narrative structure, ideology, and emotion at industrial scale.', readTime: '4 min read', body: 'Film studies explores how moving images tell stories, create meaning, and shape culture. Its insights matter for entertainment, advertising, education, and political communication. Visual storytelling has rules, and film studies helps name them.', examples: ['Editors use film language to guide viewer attention', 'Political ads borrow cinematic framing techniques', 'Teachers use film analysis for media literacy', 'Game cutscenes draw directly from film theory'] },
+      { id: 'art-history', emoji: '🖼️', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Art History', desc: 'Images reflect power, belief, technology, and taste — and help us understand all four.', readTime: '5 min read', body: 'Art history studies visual culture across time. It reveals how societies represent authority, beauty, labor, religion, and identity. Art historians also work in curation, conservation, provenance research, and cultural policy.', examples: ['Museums use provenance work to trace ownership and theft', 'Designers borrow historical motifs for contemporary branding', 'Conservation experts preserve fragile works and murals', 'Visual analysis helps interpret political symbolism in public art'] },
+      { id: 'design-theory', emoji: '✏️', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Design Theory', desc: 'How things look and feel affects trust, comprehension, and behavior in every medium.', readTime: '5 min read', body: 'Design theory studies the principles behind visual and functional design. It helps creators understand hierarchy, affordance, form, and communication. Good design is not decoration — it is applied thinking.', examples: ['Information design improves public signage and safety', 'Product teams use design systems for consistency at scale', 'Forms become easier to complete through better layout theory', 'Brand trust is influenced by coherent visual language'] },
+      { id: 'theatre-studies', emoji: '🎭', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Theatre Studies', desc: 'Live performance teaches embodiment, narrative, audience dynamics, and collaboration under pressure.', readTime: '4 min read', body: 'Theatre studies examines performance, staging, dramaturgy, and spectatorship. Its lessons matter not only on stage but also in education, leadership, therapy, and event design. Performance is a deeply social technology.', examples: ['Actors train voice and presence for public communication', 'Role-play techniques support medical and legal training', 'Community theatre strengthens local civic engagement', 'Directing methods inform collaborative creative work'] },
+      { id: 'architecture', emoji: '🏛️', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Architecture', desc: 'Buildings shape health, emotion, energy use, culture, and how people move through daily life.', readTime: '6 min read', body: 'Architecture blends art, engineering, and social planning. It determines how spaces function and how people experience them. Architecture matters in housing, sustainability, public institutions, and urban life at every scale.', examples: ['Passive cooling design reduces building energy demand', 'Hospital layouts affect stress and recovery', 'School architecture influences collaboration and learning', 'Public buildings signal civic identity through form'] },
+      { id: 'industrial-design', emoji: '🪑', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Industrial Design', desc: 'Everyday objects work better when form, ergonomics, manufacturing, and meaning are designed together.', readTime: '5 min read', body: 'Industrial design creates the physical products people use every day, from chairs to phones to medical tools. The field balances usability, production constraints, safety, and visual appeal. Great products rarely happen by accident.', examples: ['Medical devices are redesigned to reduce user error', 'Consumer products improve grip and comfort through ergonomics', 'Packaging design reduces waste and shipping cost', 'Accessible hardware benefits users across age groups'] },
+      { id: 'creative-writing', emoji: '✍️', tag: 'Arts', tagClass: 'tag-purple', color: 'purple', category: 'arts', title: 'Creative Writing', desc: 'Narrative skill matters in entertainment, branding, fundraising, teaching, and leadership.', readTime: '4 min read', body: 'Creative writing is not only for novelists. The ability to shape voice, structure, pacing, and emotional payoff matters in screenwriting, game design, nonprofit campaigns, and product storytelling. Humans remember stories better than data alone.', examples: ['Brands use narrative to make campaigns memorable', 'Game writers build worlds through dialogue and lore', 'Fundraising copy depends on emotional and narrative framing', 'Teachers use storytelling to explain complex ideas'] },
+      { id: 'comparative-literature', emoji: '📖', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Comparative Literature', desc: 'Reading across cultures reveals how stories travel, change, and reflect power.', readTime: '5 min read', body: 'Comparative literature studies texts across languages, regions, and traditions. It uncovers how themes, genres, and ideas move between cultures. That perspective is valuable in translation, diplomacy, publishing, and cultural analysis.', examples: ['Transnational themes help publishers position books globally', 'Comparative reading improves cross-cultural education', 'Adaptation studies reveal how stories change across media', 'Diplomatic cultural programs use shared literary reference points'] },
+      { id: 'classics', emoji: '🏛️', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Classics', desc: 'Ancient Greece and Rome still shape law, rhetoric, politics, architecture, and education.', readTime: '5 min read', body: 'Classics studies the languages, literature, history, and culture of the ancient Mediterranean. Its influence persists through political institutions, military vocabulary, legal ideas, mythology, and educational traditions. The past is closer than it looks.', examples: ['Political rhetoric still borrows from classical models', 'Architects use classical forms in civic design', 'Latin helps decode legal and scientific terminology', 'Mythic structures continue to shape film and literature'] },
+      { id: 'religious-studies', emoji: '🕯️', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Religious Studies', desc: 'Belief systems influence politics, conflict, ritual, ethics, and community life around the world.', readTime: '5 min read', body: 'Religious studies examines traditions, texts, rituals, institutions, and lived experience. It helps policymakers, educators, and journalists understand communities more accurately and avoid simplistic assumptions about motivation and identity.', examples: ['Diplomats need religious literacy in conflict-sensitive regions', 'Hospitals improve care by understanding patient belief practices', 'Journalists cover religious movements with greater nuance', 'Community organizers work better with local faith institutions'] },
+      { id: 'ethics', emoji: '⚖️', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Ethics', desc: 'Whenever a system can help, harm, include, or exploit, ethics becomes practical.', readTime: '5 min read', body: 'Ethics studies how we ought to act and what makes choices right or wrong. Far from being abstract only, it shapes medicine, AI policy, business governance, journalism, and environmental decisions. Modern systems scale moral consequences quickly.', examples: ['Medical ethics guides informed consent and triage decisions', 'AI teams use ethics frameworks to assess bias and harm', 'Business leaders develop governance around conflicting incentives', 'Research ethics protects human participants in studies'] },
+      { id: 'aesthetics', emoji: '✨', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Aesthetics', desc: 'Questions of beauty, taste, and perception matter in design, branding, art, and technology.', readTime: '4 min read', body: 'Aesthetics asks what makes experiences feel elegant, moving, ugly, or sublime. These questions are not confined to galleries; they shape interfaces, architecture, luxury markets, and entertainment. How something feels often changes how it is judged.', examples: ['Luxury brands rely on carefully cultivated aesthetic cues', 'App design influences trust through visual coherence', 'Museum curation balances interpretation and emotional experience', 'Game worlds use aesthetic consistency to deepen immersion'] },
+      { id: 'library-science', emoji: '📚', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Library Science', desc: 'Organizing knowledge well is essential for research, archives, search, and public access to information.', readTime: '5 min read', body: 'Library science focuses on classification, retrieval, preservation, and access to information. Librarians and information specialists make knowledge usable, trustworthy, and findable — a mission that matters even more in the digital age.', examples: ['Metadata systems improve search and discovery', 'Archives preserve fragile records for future research', 'Public libraries provide digital access and community services', 'Knowledge management teams borrow library science principles'] },
+      { id: 'archival-studies', emoji: '🗄️', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Archival Studies', desc: 'What gets preserved shapes memory, law, accountability, and history itself.', readTime: '5 min read', body: 'Archival studies concerns the long-term preservation, arrangement, and interpretation of records. Archives support legal evidence, historical scholarship, journalism, and institutional continuity. A society without archives forgets too easily.', examples: ['Digital preservation keeps records readable across formats', 'Human rights investigations depend on preserved documentation', 'Organizations use archives for compliance and institutional memory', 'Historical collections support genealogical and community research'] },
+      { id: 'translation-studies', emoji: '🌍', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Translation Studies', desc: 'Translation is never just word replacement — it is cultural mediation with real stakes.', readTime: '5 min read', body: 'Translation studies examines how meaning moves between languages and contexts. It matters in diplomacy, publishing, software localization, law, medicine, and machine translation. Poor translation can be costly; excellent translation builds trust and clarity.', examples: ['Medical interpreters help prevent dangerous misunderstandings', 'Localization teams adapt products for international markets', 'Diplomatic texts require precise language negotiation', 'Machine translation improves through human-informed evaluation'] },
+      { id: 'philology', emoji: '📜', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Philology', desc: 'Studying old texts and language change helps recover lost meanings, histories, and cultural connections.', readTime: '5 min read', body: 'Philology combines linguistic, literary, and historical methods to study texts and languages over time. It helps scholars reconstruct manuscripts, trace concept evolution, and understand how meaning shifts across centuries. It is slow work with long reach.', examples: ['Manuscript comparison reconstructs damaged or altered texts', 'Historical language study clarifies legal and religious documents', 'Digital humanities projects annotate and preserve old corpora', 'Etymological analysis reveals cultural contact and exchange'] },
+      { id: 'history-of-science', emoji: '🔭', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'History of Science', desc: 'Science has a history, and understanding it helps us see how knowledge, error, and institutions evolve.', readTime: '5 min read', body: 'The history of science studies how ideas, experiments, instruments, and institutions developed over time. It reminds us that science is powerful but human, shaped by culture, politics, and technology as well as evidence.', examples: ['Science educators use historical case studies to teach method', 'Policy debates benefit from understanding past expert failures', 'Museum exhibits explain how instruments changed discovery', 'Researchers reflect on how funding shapes scientific priorities'] },
+      { id: 'history-of-medicine', emoji: '🩺', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'History of Medicine', desc: 'Past medical systems reveal how societies define illness, care, expertise, and trust.', readTime: '5 min read', body: 'History of medicine examines how healing practices, institutions, and medical authority changed over time. It informs public health communication, bioethics, and health policy by showing how trust and exclusion have been built historically.', examples: ['Past vaccine campaigns reveal patterns of mistrust and uptake', 'Medical schools use history to teach ethical reflection', 'Hospital policy benefits from awareness of discriminatory legacy', 'Public health messaging improves through historical context'] },
+      { id: 'diaspora-studies', emoji: '🧳', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Diaspora Studies', desc: 'Migration reshapes identity, culture, politics, and memory across generations and borders.', readTime: '5 min read', body: 'Diaspora studies examines dispersed communities and the ties they maintain across places. It helps explain remittances, cultural retention, transnational politics, and hybrid identity. In a mobile world, these dynamics are increasingly central.', examples: ['Cities design services around multilingual diaspora communities', 'Researchers track transnational political influence and funding', 'Museums preserve migrant histories and family archives', 'Media producers create content for globally connected audiences'] },
+      { id: 'gender-studies', emoji: '♀️', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Gender Studies', desc: 'Gender shapes institutions, labor, health, safety, and representation in ways policy cannot ignore.', readTime: '5 min read', body: 'Gender studies analyzes how gender is constructed, experienced, and enforced socially and historically. It informs law, workplace policy, medicine, education, and design by showing how apparently neutral systems often affect people differently.', examples: ['Medical studies improve by accounting for sex and gender differences', 'Workplace audits identify gendered pay and promotion gaps', 'Urban safety planning considers gendered use of public space', 'Media analysis reveals patterns of representation and bias'] },
+      { id: 'queer-theory', emoji: '🌈', tag: 'Humanities', tagClass: 'tag-pink', color: 'pink', category: 'humanities', title: 'Queer Theory', desc: 'Questioning norms around identity and power helps explain culture, law, and social change.', readTime: '5 min read', body: 'Queer theory studies how categories like gender and sexuality are produced, policed, and challenged. Its frameworks help analyze institutions, media, rights movements, and everyday assumptions about normality and belonging.', examples: ['Media critics analyze representation beyond stereotypes', 'Legal scholars examine how institutions define family and identity', 'Education programs build more inclusive curricula and policy', 'Historians recover marginalized lives obscured by old categories'] },
+      { id: 'peace-and-conflict-studies', emoji: '🕊️', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Peace and Conflict Studies', desc: 'Understanding how violence begins, spreads, and ends is vital for diplomacy and community safety.', readTime: '5 min read', body: 'Peace and conflict studies examines war, mediation, reconciliation, and the conditions that make violence more or less likely. It combines political analysis, psychology, history, and law to support prevention and recovery.', examples: ['Mediators use conflict analysis to design peace talks', 'Post-conflict justice efforts draw on reconciliation research', 'Community violence interruption programs use conflict theory', 'Early-warning systems monitor escalation risks in fragile regions'] },
+      { id: 'social-work', emoji: '🤝', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Social Work', desc: 'Helping people navigate crisis requires structured knowledge about systems, trauma, and support.', readTime: '5 min read', body: 'Social work connects individuals and communities to resources while addressing structural barriers. The field matters in hospitals, schools, courts, shelters, and elder care. It is both human-facing and systems-facing at the same time.', examples: ['Hospital social workers coordinate discharge and home support', 'School social workers help students facing instability', 'Child welfare systems depend on trauma-informed practice', 'Housing programs connect clients with long-term services'] },
+      { id: 'education-theory', emoji: '🎓', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Education Theory', desc: 'How people learn shapes schools, training, online courses, and workplace development.', readTime: '5 min read', body: 'Education theory explores how knowledge is taught, learned, assessed, and retained. Its ideas influence curriculum design, classroom management, educational technology, and adult learning. Teaching well is a science as much as an art.', examples: ['Instructional design improves online course completion', 'Spaced repetition boosts long-term memory retention', 'Assessment theory helps educators measure understanding better', 'Workplace training programs use adult learning principles'] },
+      { id: 'cognitive-science', emoji: '🧠', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Cognitive Science', desc: 'Mind, memory, perception, and reasoning matter for education, AI, interfaces, and decision-making.', readTime: '6 min read', body: 'Cognitive science combines psychology, neuroscience, linguistics, philosophy, and computer science to study the mind. Its findings help explain why humans make mistakes, learn patterns, and interact with tools the way they do.', examples: ['Interface designers reduce cognitive load in complex workflows', 'Learning apps use memory research to improve recall', 'Decision support systems are built around human attention limits', 'AI researchers compare symbolic and statistical models of cognition'] },
+      { id: 'behavioral-psychology', emoji: '🧠', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Behavioral Psychology', desc: 'Behavior changes when environments, rewards, and habits change — and that insight is widely applied.', readTime: '5 min read', body: 'Behavioral psychology studies observable behavior and how it is shaped by reinforcement, cues, and conditioning. Its methods influence therapy, education, animal training, product design, and public policy.', examples: ['Habit-forming apps use cue-and-reward loops', 'Exposure therapies help treat phobias', 'Classroom reinforcement systems influence student behavior', 'Health campaigns use prompts and feedback to change habits'] },
+      { id: 'clinical-psychology', emoji: '🛋️', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Clinical Psychology', desc: 'Mental health care depends on careful assessment, therapy, and evidence-based treatment.', readTime: '5 min read', body: 'Clinical psychology studies mental distress, diagnosis, treatment, and resilience. It shapes therapy methods, screening tools, and interventions in schools, hospitals, and communities. Psychological health affects every other part of life.', examples: ['CBT helps patients challenge harmful thought patterns', 'Early screening identifies anxiety and depression sooner', 'Trauma-informed care improves outcomes across services', 'Behavioral interventions support addiction recovery'] },
+      { id: 'social-psychology', emoji: '👤', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Social Psychology', desc: 'How people think and act in groups affects politics, work, conflict, and everyday judgment.', readTime: '5 min read', body: 'Social psychology studies conformity, persuasion, identity, bias, and interpersonal behavior. It helps explain why groups polarize, why people follow norms, and how context changes decision-making. Many collective problems are really social-psychology problems.', examples: ['Campaigns use social norm messaging to influence behavior', 'Workplace bias training draws on implicit cognition research', 'Crowd dynamics matter in protest and emergency planning', 'Peer effects shape school and public health outcomes'] },
+      { id: 'network-science', emoji: '🕸️', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Network Science', desc: 'From friendships to power grids to disease spread, networks explain how connections shape outcomes.', readTime: '6 min read', body: 'Network science studies patterns of connection in complex systems. It builds on graph theory but focuses on real-world structure and dynamics. The field helps explain resilience, contagion, influence, and failure cascades.', examples: ['Epidemiologists model transmission through contact networks', 'Infrastructure planners assess grid vulnerability to cascading failure', 'Social platforms analyze influence patterns in communities', 'Supply chain resilience depends on hidden network structure'] },
+      { id: 'complexity-science', emoji: '🌀', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Complexity Science', desc: 'Some systems cannot be understood piece by piece — their behavior emerges from interaction.', readTime: '6 min read', body: 'Complexity science studies systems with many interacting parts, such as cities, ecosystems, economies, and brains. It focuses on emergence, feedback, adaptation, and nonlinearity. This helps explain why simple interventions can have surprising effects.', examples: ['Traffic jams emerge from local interactions, not just road volume', 'Financial crises spread through interconnected institutions', 'Ecosystem collapse can follow tipping-point dynamics', 'Urban growth patterns reveal self-organization at scale'] },
+      { id: 'chaos-theory', emoji: '🌀', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Chaos Theory', desc: 'Tiny changes can create huge differences in dynamic systems, from weather to engineering.', readTime: '5 min read', body: 'Chaos theory studies deterministic systems that are highly sensitive to initial conditions. It helps explain why some systems are hard to predict even when governed by rules. This matters in forecasting, engineering, biology, and beyond.', examples: ['Weather prediction faces chaos-driven uncertainty', 'Population dynamics can shift dramatically from small changes', 'Engineers analyze chaotic vibration in mechanical systems', 'Secure communication systems sometimes exploit chaotic signals'] },
+      { id: 'numerical-analysis', emoji: '💻', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Numerical Analysis', desc: 'Many scientific answers cannot be solved exactly — they have to be computed carefully.', readTime: '5 min read', body: 'Numerical analysis studies how to approximate mathematical solutions efficiently and accurately. It is fundamental to simulation, engineering, weather models, and graphics. Computation is only useful if the numbers can be trusted.', examples: ['Engineers simulate stress and fluid flow numerically', 'Climate models require stable approximation methods', 'Computer graphics render complex scenes using numerical techniques', 'Scientific computing depends on error bounds and convergence analysis'] },
+      { id: 'optimization', emoji: '🎯', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Optimization', desc: 'Whenever resources are limited and choices matter, optimization is the hidden engine.', readTime: '5 min read', body: 'Optimization finds the best possible choice under given constraints. It is central to machine learning, transport, manufacturing, scheduling, and finance. Many modern systems are, at their core, optimization problems.', examples: ['Delivery routes are optimized to save fuel and time', 'Machine learning models are trained by minimizing loss', 'Portfolio allocation balances risk and return constraints', 'Factories optimize production schedules across limited capacity'] },
+      { id: 'bayesian-inference', emoji: '📐', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Bayesian Inference', desc: 'Updating beliefs with evidence is one of the most practical ideas in science and decision-making.', readTime: '5 min read', body: 'Bayesian inference provides a framework for revising probability estimates as new information arrives. It is widely used in medicine, robotics, machine learning, and forecasting. It gives uncertainty a disciplined way to learn.', examples: ['Medical tests are interpreted using prior probabilities', 'Robots localize themselves by updating uncertain position estimates', 'Forecasting systems revise predictions when new data arrives', 'Spam filters classify email using Bayesian updating'] },
+      { id: 'information-theory', emoji: '📦', tag: 'Math', tagClass: 'tag-purple', color: 'purple', category: 'math', title: 'Information Theory', desc: 'Compression, coding, communication, and uncertainty all come together in this foundational field.', readTime: '6 min read', body: 'Information theory studies how information is measured, transmitted, compressed, and protected against noise. It underlies the design of communication systems, storage media, cryptography, and machine learning concepts like entropy.', examples: ['Data compression reduces storage and bandwidth needs', 'Error-correcting codes keep messages intact over noisy channels', 'Entropy measures uncertainty in learning systems', 'Cellular networks rely on information-theoretic limits'] },
+      { id: 'robotics', emoji: '🤖', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Robotics', desc: 'Machines that sense, decide, and act are changing warehouses, surgery, agriculture, and exploration.', readTime: '6 min read', body: 'Robotics combines mechanics, control, perception, and planning to create systems that interact with the physical world. Its applications range from industrial arms to household devices to planetary rovers. The field brings software into contact with reality.', examples: ['Warehouse robots accelerate sorting and fulfillment', 'Surgical robots enable precise minimally invasive procedures', 'Agricultural robots identify weeds and monitor crops', 'Disaster-response robots enter places too dangerous for humans'] },
+      { id: 'embedded-systems', emoji: '🔌', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Embedded Systems', desc: 'Tiny computers hidden inside devices run cars, appliances, medical tools, and industrial equipment.', readTime: '5 min read', body: 'Embedded systems are specialized computing units built into physical products. They must be efficient, reliable, and often real-time. Much of modern technology depends on computers you never notice because they are built into everything else.', examples: ['Cars contain dozens of embedded controllers', 'Medical pumps rely on precise real-time embedded software', 'Smart thermostats coordinate sensors and actuation', 'Industrial machines use embedded systems for safe automation'] },
+      { id: 'database-systems', emoji: '🗃️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Database Systems', desc: 'Storing information well is what makes search, banking, logistics, and apps actually function.', readTime: '5 min read', body: 'Database systems organize, retrieve, and protect data at scale. They are essential for nearly every modern service, from hospitals to e-commerce to government records. A system is only as useful as its ability to remember and query information.', examples: ['Banks depend on transaction-safe databases', 'E-commerce platforms track inventory and orders in real time', 'Hospitals manage records across secure data systems', 'Analytics teams query large warehouses for business insight'] },
+      { id: 'software-engineering', emoji: '🧑‍💻', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Software Engineering', desc: 'Writing code is one thing. Building systems that survive growth, change, and failure is another.', readTime: '5 min read', body: 'Software engineering is about designing, building, testing, and maintaining software reliably. It matters because many digital failures are not algorithmic failures but engineering failures: poor architecture, weak testing, or fragile deployment.', examples: ['Version control enables teams to collaborate safely', 'Automated testing catches regressions before release', 'Monitoring systems detect outages and performance issues', 'Well-designed architecture supports long-term product growth'] },
+      { id: 'quantum-computing', emoji: '⚛️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Quantum Computing', desc: 'Computing with quantum effects may transform certain kinds of simulation, optimization, and cryptography.', readTime: '6 min read', body: 'Quantum computing uses superposition and entanglement to process information in ways different from classical machines. It is still emerging, but its potential impact on chemistry, materials, and security has already changed research agendas.', examples: ['Quantum simulation may model molecules more efficiently', 'Cryptographers prepare for post-quantum security needs', 'Optimization research explores quantum-inspired algorithms', 'Physics labs develop new hardware from quantum control advances'] },
+      { id: 'geographic-information-systems', emoji: '🛰️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Geographic Information Systems', desc: 'Spatial data connects maps to decisions in public health, planning, logistics, and conservation.', readTime: '5 min read', body: 'GIS combines mapping, databases, and spatial analysis to understand where things happen and why. It is used in emergency response, retail planning, disease surveillance, and environmental monitoring. Place is data-rich.', examples: ['Public health teams map disease clusters geographically', 'Retailers choose locations using drive-time and demand maps', 'Conservation groups identify habitat fragmentation from satellite data', 'Cities manage utilities and zoning through GIS layers'] },
+      { id: 'remote-sensing', emoji: '🛰️', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Remote Sensing', desc: 'Seeing Earth from a distance helps monitor crops, forests, war damage, weather, and climate.', readTime: '5 min read', body: 'Remote sensing uses satellites, aircraft, and sensors to measure features of the Earth without direct contact. It provides crucial information for environmental science, agriculture, security analysis, and disaster response.', examples: ['Satellite imagery tracks wildfire spread and burn severity', 'Crop monitoring uses spectral signatures to detect stress', 'Humanitarian teams assess flood damage from space', 'Deforestation is measured over time using remote sensing data'] },
+      { id: 'energy-systems', emoji: '⚡', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Energy Systems', desc: 'Producing, storing, and distributing power is one of the central engineering challenges of modern life.', readTime: '6 min read', body: 'Energy systems study how electricity, fuels, storage, and demand interact across infrastructure. The field matters for grid reliability, decarbonization, industrial planning, and national security. Energy is the substrate of everything else.', examples: ['Grid operators balance demand and supply in real time', 'Battery storage helps integrate intermittent renewables', 'Industrial facilities optimize heat and power usage', 'Energy modeling informs long-term decarbonization strategy'] },
+      { id: 'transportation-engineering', emoji: '🚆', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Transportation Engineering', desc: 'Moving people and goods safely and efficiently is a design and systems problem.', readTime: '5 min read', body: 'Transportation engineering covers roads, rail, transit, traffic flow, and safety systems. It shapes commuting time, freight costs, emissions, and access to opportunity. Transport design quietly structures daily life.', examples: ['Signal timing reduces congestion at busy intersections', 'Rail planning improves freight and passenger movement', 'Road safety design lowers crash severity', 'Transit network redesign improves service coverage'] },
+      { id: 'biomedical-engineering', emoji: '🫀', tag: 'Tech', tagClass: 'tag-purple', color: 'purple', category: 'tech', title: 'Biomedical Engineering', desc: 'Engineering meets medicine in devices, imaging, prosthetics, and diagnostics that improve care.', readTime: '6 min read', body: 'Biomedical engineering applies engineering principles to health and medicine. It helps create implants, imaging tools, biosensors, prosthetics, and therapeutic systems. The field translates scientific insight into usable care technologies.', examples: ['Prosthetic limbs are improved through biomechanics and materials', 'Wearable monitors track heart rhythms continuously', 'Medical imaging hardware supports earlier diagnosis', 'Implants are engineered for compatibility and durability'] },
+      { id: 'biomechanics', emoji: '🏃', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Biomechanics', desc: 'Movement science improves sports, injury prevention, prosthetics, and rehabilitation.', readTime: '5 min read', body: 'Biomechanics studies how forces act on living bodies. It matters in medicine, sports performance, ergonomics, and robotics. Understanding motion can prevent injury and improve design at the same time.', examples: ['Athletes use gait analysis to reduce injury risk', 'Physical therapists measure movement for rehabilitation planning', 'Prosthetics are designed around joint mechanics', 'Ergonomic tools reduce strain in repetitive work'] },
+      { id: 'astrophysics', emoji: '🌌', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Astrophysics', desc: 'Studying stars and galaxies advances imaging, computation, instrumentation, and our place in the universe.', readTime: '6 min read', body: 'Astrophysics investigates the physics of celestial objects and cosmic phenomena. Though its questions are huge, its methods have yielded practical advances in sensors, signal processing, and high-performance computing. Exploration often generates tools used much closer to home.', examples: ['Astronomical imaging techniques improve medical image analysis', 'Large sky surveys push advances in big-data processing', 'Precision detectors developed for telescopes influence other sensors', 'Orbital mechanics knowledge supports satellite operations'] },
+      { id: 'astronomy', emoji: '🔭', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Astronomy', desc: 'Observing the sky builds instruments, data methods, and scientific literacy on a cosmic scale.', readTime: '5 min read', body: 'Astronomy studies celestial bodies and the structure of the universe through observation. It has long driven innovation in optics, timing, navigation, and public science engagement. Few fields inspire wonder and method so directly at once.', examples: ['Telescope instrumentation advances precision optics', 'Public astronomy programs boost science education engagement', 'Timekeeping and celestial reference systems support navigation', 'Sky surveys generate massive datasets for computational analysis'] },
+      { id: 'planetary-science', emoji: '🪐', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Planetary Science', desc: 'Studying other worlds helps us understand Earth, geology, atmospheres, and the future of exploration.', readTime: '5 min read', body: 'Planetary science combines astronomy, geology, chemistry, and atmospheric science to study planets and moons. It reveals how worlds form and change, which in turn sharpens our understanding of Earth and life-supporting environments.', examples: ['Mars rover instruments test remote geologic analysis methods', 'Planetary atmospheres improve comparative climate understanding', 'Impact crater studies inform hazard assessment on Earth', 'Mission design advances robotics and autonomous exploration'] },
+      { id: 'aerodynamics', emoji: '✈️', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Aerodynamics', desc: 'How fluids move around objects determines flight, racing, ventilation, and energy efficiency.', readTime: '5 min read', body: 'Aerodynamics studies the interaction between air and moving objects. It matters in aircraft design, sports, architecture, wind energy, and vehicle efficiency. Invisible flows have enormous practical consequences.', examples: ['Airfoil design determines lift and drag in aircraft', 'Cyclists and race teams optimize body and vehicle shape', 'Ventilation systems rely on airflow modeling in buildings', 'Wind turbine blades are refined using aerodynamic principles'] },
+      { id: 'fluid-dynamics', emoji: '🌪️', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Fluid Dynamics', desc: 'Liquids and gases govern weather, blood flow, engines, pipelines, and oceans.', readTime: '6 min read', body: 'Fluid dynamics studies how liquids and gases move. It is central to weather, industrial design, medicine, and transport systems. Many engineering problems become fluid problems sooner or later.', examples: ['Blood flow simulations support cardiovascular treatment planning', 'Pipeline design depends on turbulence and pressure modeling', 'Weather systems are giant fluid-dynamics problems', 'Chemical reactors rely on controlled mixing and flow'] },
+      { id: 'plasma-physics', emoji: '⚡', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Plasma Physics', desc: 'The most common state of visible matter matters for fusion, space weather, and advanced manufacturing.', readTime: '6 min read', body: 'Plasma physics studies ionized gases found in stars, lightning, fusion devices, and industrial processes. Its applications range from semiconductor manufacturing to solar storm forecasting to the long-term dream of fusion energy.', examples: ['Semiconductor fabrication uses plasma etching', 'Fusion reactors depend on plasma confinement research', 'Space weather forecasting tracks solar plasma events', 'High-intensity lighting and surface treatment use plasma technology'] },
+      { id: 'analytical-chemistry', emoji: '⚗️', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Analytical Chemistry', desc: 'Knowing exactly what a substance contains is crucial in medicine, food safety, and environmental protection.', readTime: '5 min read', body: 'Analytical chemistry develops methods to detect, identify, and quantify chemical substances. It is essential to quality control, toxicology, forensics, pharmaceuticals, and environmental monitoring. Measurement is the backbone of chemistry.', examples: ['Water testing identifies contaminants at low concentrations', 'Food labs detect adulteration and spoilage compounds', 'Drug manufacturing depends on purity verification', 'Forensic labs analyze unknown substances from evidence'] },
+      { id: 'organic-chemistry', emoji: '🧪', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Organic Chemistry', desc: 'Carbon-based molecules are the foundation of drugs, plastics, fuels, and much of modern industry.', readTime: '6 min read', body: 'Organic chemistry studies carbon-containing compounds and how they react. It is central to pharmaceuticals, materials science, agriculture, and consumer products. Many life-saving and life-enabling molecules are products of organic synthesis.', examples: ['Medicinal chemists design drug candidates molecule by molecule', 'Polymers for packaging and electronics come from organic chemistry', 'Agricultural chemicals are developed through reaction design', 'Fragrance and flavor compounds are synthesized and analyzed organochemically'] },
+      { id: 'physical-chemistry', emoji: '🧫', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Physical Chemistry', desc: 'This field explains why chemical systems behave the way they do — in energy, reaction, and structure.', readTime: '6 min read', body: 'Physical chemistry applies physics to chemical systems, connecting molecules to thermodynamics, kinetics, and quantum behavior. It underpins battery chemistry, catalysis, spectroscopy, and reaction engineering. It is where chemistry becomes deeply predictive.', examples: ['Battery performance depends on electrochemical behavior', 'Catalyst design relies on reaction kinetics and surface physics', 'Spectroscopy identifies compounds through energy interactions', 'Industrial reactors are optimized using thermodynamic constraints'] },
+      { id: 'inorganic-chemistry', emoji: '🔬', tag: 'Science', tagClass: 'tag-teal', color: 'teal', category: 'science', title: 'Inorganic Chemistry', desc: 'Metals, minerals, catalysts, and advanced materials all depend on inorganic chemistry.', readTime: '5 min read', body: 'Inorganic chemistry studies compounds outside the classic carbon-centered framework, including metals, salts, catalysts, and coordination complexes. It matters in electronics, energy, catalysis, pigments, and materials engineering.', examples: ['Catalytic converters rely on inorganic catalyst chemistry', 'Battery cathodes use carefully engineered metal compounds', 'Pigments and coatings depend on inorganic materials', 'Industrial synthesis often uses transition-metal catalysts'] },
+      { id: 'economics-of-innovation', emoji: '💡', tag: 'Social Sciences', tagClass: 'tag-teal', color: 'teal', category: 'social', title: 'Economics of Innovation', desc: 'Why some ideas spread, scale, and pay off while others fail is a question of incentives and systems.', readTime: '5 min read', body: 'The economics of innovation studies research investment, entrepreneurship, patents, spillovers, and technological change. It helps explain how new ideas become productive industries — and why markets alone do not always support the most important breakthroughs.', examples: ['Governments subsidize research with long-term spillovers', 'Patent systems influence startup and pharma strategy', 'Regional innovation clusters form around talent and capital networks', 'Firms study diffusion curves before launching new technologies'] }
     ];
 
     let activeCategory = 'all';
