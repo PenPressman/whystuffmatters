@@ -1108,14 +1108,12 @@ topics.push(
     let activeCategory = 'all';
     let searchQuery = '';
 
-    function renderCards() {
+function renderCards() {
   const grid = document.getElementById('cardsGrid');
   const filtered = topics.filter(t => {
     const matchCat = activeCategory === 'all' || t.category === activeCategory;
     const q = searchQuery.toLowerCase();
-    const matchSearch = !q || t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q) 
-    
-
+    const matchSearch = !q || t.title.toLowerCase().includes(q) || t.desc.toLowerCase().includes(q)
   });
   if (filtered.length === 0) {
     grid.innerHTML = `<div style="grid-column:1/-1; text-align:center; padding:3rem; color:var(--muted);">No topics found.</div>`;
